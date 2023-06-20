@@ -13,3 +13,7 @@ java, gradle, springboot, jpa, mysql, swagger
 Windows 10, VSCODE, DBEAVER
 - 사용된 기술 및 언어 
 Vue.js
+
+<프로젝트 설명>
+- 위의 기술 및 언어들을 사용하여 회원 CRUD, 게시글 CRUD를 구현하였습니다
+- 추후 시큐리티 적용, 웹서비스 배포를 목표로 하고있습니다
