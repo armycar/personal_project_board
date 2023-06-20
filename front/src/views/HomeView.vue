@@ -1,25 +1,35 @@
 <template>
-<div class="top-nav">
-<a v-if="isLoggedIn" class="username">{{ username }}님 안녕하세요</a>
-<router-link v-if="isLoggedIn" to="/mypage" class="mypage_btn">마이페이지</router-link>
-<a v-if="isLoggedIn" href="#" class="logout_btn" @click="logout">로그아웃</a>
-<a v-if="!isLoggedIn" href="/api/member/join" class="join_btn">회원가입</a> 
-<a v-if="!isLoggedIn" href="/api/member/login " class="login_btn">로그인</a>
-</div>
+  <div class="top-nav">
+    <a v-if="isLoggedIn" class="username">{{ username }}님 안녕하세요</a>
+    <router-link v-if="isLoggedIn" to="/mypage" class="mypage_btn">마이페이지</router-link>
+    <a v-if="isLoggedIn" href="#" class="logout_btn" @click="logout">로그아웃</a>
+    <a v-if="!isLoggedIn" href="/api/member/join" class="join_btn">회원가입</a>
+    <a v-if="!isLoggedIn" href="/api/member/login" class="login_btn">로그인</a>
+  </div>
 
- <el-table @row-click="rowClicked" :data="articles" style ="width: 100%" >
-<el-table-column prop="aiSeq" label="번호" align="center"></el-table-column>
-<!-- <el-table-column prop="acName" label="카테고리" align="center"></el-table-column> -->
-<el-table-column prop="aiTitle" label="제목" align="center"></el-table-column>
-<el-table-column prop="miNickname" label="작성자" align="center"></el-table-column>
-<!-- <el-table-column prop="comment" label="댓글수" align="center"></el-table-column> -->
-<!-- <el-table-column prop="recommend" label="추천수" align="center"></el-table-column> -->
-<el-table-column prop="aiRegDt" label="작성일" align="center"></el-table-column>
-<el-table-column prop="aiView" label="조회수" align="center"></el-table-column>
-</el-table>
-<a href="/api/article/write" class="write_btn">
-<img src="/images/write.png">
-</a>
+  <el-table @row-click="rowClicked" :data="articles" style="width: 100%">
+    <el-table-column prop="aiSeq" label="번호" align="center"></el-table-column>
+    <el-table-column prop="aiTitle" label="제목" align="center"></el-table-column>
+    <el-table-column prop="miNickname" label="작성자" align="center"></el-table-column>
+    <el-table-column prop="aiRegDt" label="작성일" align="center"></el-table-column>
+    <el-table-column prop="aiView" label="조회수" align="center"></el-table-column>
+  </el-table>
+
+  <el-pagination
+    v-if="totalPages > 1"
+    v-model="currentPage"
+    :page-sizes="[5, 10, 15, 20]"
+    :page-size="pageSize"
+    :total="totalItems"
+    layout="prev, pager, next"
+    @size-change="handleSizeChange"
+    @current-change="handlePageChange"
+    class="pagination"
+  ></el-pagination>
+
+  <a href="/api/article/write" class="write_btn">
+    <img src="/images/write.png">
+  </a>
 </template>
 
 <script>
@@ -29,8 +39,10 @@ import apiBoard from '@/api/board';
 export default {
   data() {
     return {
-      articles : null,
-      page: 0,
+      articles: [],
+      currentPage: 1,
+      pageSize: 5,
+      totalItems: 0,
     };
   },
   computed: {
@@ -39,38 +51,47 @@ export default {
     },
     username() {
       return sessionStorage.getItem('username');
-    }
+    },
+    totalPages() {
+      return Math.ceil(this.totalItems / this.pageSize);
+    },
   },
   mounted() {
-    apiBoard.getArticles("all")
-    .then((response) => {
-      console.log("getArticles", response);
-       this.articles = response.data.map(article => {
-        article.aiRegDt = moment(article.aiRegDt).format('YYYY-MM-DD HH:mm:ss');
-        return article;
-      });
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+    this.getArticles();
   },
-
   methods: {
+    getArticles() {
+      apiBoard.getArticles("all", this.currentPage - 1, this.pageSize)
+        .then((response) => {
+          console.log("getArticles", response);
+          this.articles = response.data.map((article) => {
+            article.aiRegDt = moment(article.aiRegDt).format('YYYY-MM-DD HH:mm:ss');
+            return article;
+          });
+          this.totalItems = response.headers['x-total-count'];
+        })
+        .catch((error) => {
+          console.error("getArticles", error);
+        });
+    },
+    handlePageChange(currentPage) {
+      this.currentPage = currentPage;
+      this.getArticles();
+    },
+    handleSizeChange(pageSize) {
+      this.pageSize = pageSize;
+      this.currentPage = 1;
+      this.getArticles();
+    },
     rowClicked(row) {
-      this.$router.push({
-        path: `/api/article/detail/${row.aiSeq}`,
-      })
+      this.$router.push({ name: 'ArticleView', params: { id: row.aiSeq } });
     },
     logout() {
-      sessionStorage.removeItem('token');
-      this.$router.go();
-      this.$message({
-        message: '로그아웃 되었습니다',
-        type: 'success'
-      });
-    }
-  }
-}
+      sessionStorage.clear();
+      this.$router.push('/');
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -82,22 +103,22 @@ export default {
 }
 
 .write_btn {
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    width: 48px;
-    height: 48px;
-    border-radius: 50px;
-    background: #fc1f49;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
-    z-index: 10;
-    display: inline-block;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50px;
+  background: #fc1f49;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  display: inline-block;
 }
 .write_btn img {
-    position: relative;
-    top: 50%;
-    left: 25%;
-    transform: translate(-50%, -55%);
+  position: relative;
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -55%);
 }
 
 .username {
@@ -119,5 +140,10 @@ export default {
   font-size: 14px;
   text-decoration: none;
   cursor: pointer;
+}
+
+.pagination {
+  margin-top: 16px;
+  text-align: center;
 }
 </style>
