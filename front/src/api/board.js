@@ -1,0 +1,20 @@
+import axios from "axios";
+
+const BASE_URL = "http://localhost:9244";
+
+export default {
+    getArticle: function(seq) {
+        return axios.get(BASE_URL + `/api/article/detail?seq=${seq}`);
+    },
+    getArticles: function(type, page, size) {
+        return axios.get(BASE_URL + `/api/article/read/${type}`,{
+            params: {
+                page:page,
+                size:size
+            }
+        });
+    },
+    deleteArticle: function(miSeq, aiSeq) {
+        return axios.delete(BASE_URL + `/api/article/delete?miSeq=${miSeq}&aiSeq=${aiSeq}`);
+    }    
+}
