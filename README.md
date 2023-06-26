@@ -54,6 +54,18 @@
 - VSCODE
 
 ### 4. 실행 화면
+  <details>
+    <summary>회원 관련</summary>
+
+  **1. 회원가입 화면**
+  <img width="250" alt="회원가입" src="https://github.com/armycar/personal_project_board/assets/118254103/0480a657-dc5e-4e2c-9612-2bf7ed177271">
+  회원가입을 할때 유효성 검사 및 중복확인을 수행하여 회원가입을 진행후 메인화면으로 이동한다.
+
+  **2. 로그인 화면**
+  <img width="328" alt="로그인" src="https://github.com/armycar/personal_project_board/assets/118254103/daeef99c-7efc-4306-a2ae-6d31abff1bb9">
+  아이디와 비밀번호를 입력받아 로그인이 완료되면 메인화면으로 이동한다
+  
+  </details>
 
 ## 프로젝트 구조
 ### 1. DB 설계
