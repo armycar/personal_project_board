@@ -56,22 +56,21 @@
 ### 4. 실행 화면
   <details>
     <summary>회원 관련</summary>
-
+ <img width="328" alt="로그인" src="https://github.com/armycar/personal_project_board/assets/118254103/daeef99c-7efc-4306-a2ae-6d31abff1bb9">
+    
   <img width="250" alt="회원가입" src="https://github.com/armycar/personal_project_board/assets/118254103/0480a657-dc5e-4e2c-9612-2bf7ed177271"> 
-
-  <img width="328" alt="로그인" src="https://github.com/armycar/personal_project_board/assets/118254103/daeef99c-7efc-4306-a2ae-6d31abff1bb9"> 
 
   <img width="316" alt="비밀번호찾기" src="https://github.com/armycar/personal_project_board/assets/118254103/98c8d418-8ba0-4a52-b8c3-62951a28b926">
 
-<img width="249" alt="회원정보변경" src="https://github.com/armycar/personal_project_board/assets/118254103/254a9ab0-4fb0-47ac-9c5e-057f81883e5e">
-
 <img width="186" alt="마이페이지" src="https://github.com/armycar/personal_project_board/assets/118254103/5547311c-b650-4cc0-8731-6dce3bfb4e7f">
+
+<img width="249" alt="회원정보변경" src="https://github.com/armycar/personal_project_board/assets/118254103/254a9ab0-4fb0-47ac-9c5e-057f81883e5e">
   </details>
   <br>
   <details>
     <summary>게시글 관련</summary>
+    <img width="1274" alt="메인" src="https://github.com/armycar/personal_project_board/assets/118254103/37f618bd-0a02-4235-b530-644cb7a0eeca">
     <img width="1071" alt="게시글올리기" src="https://github.com/armycar/personal_project_board/assets/118254103/e0a6202a-d6d3-4e5c-9139-e09a0e2444e9">
-<img width="1274" alt="메인" src="https://github.com/armycar/personal_project_board/assets/118254103/37f618bd-0a02-4235-b530-644cb7a0eeca">
 <img width="779" alt="상세보기" src="https://github.com/armycar/personal_project_board/assets/118254103/f306cce4-f9d6-42db-b92f-ba066cbd89c7">
   </details>
 
