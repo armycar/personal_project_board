@@ -59,4 +59,5 @@
 ### 1. DB 설계
 
 ### 2. API 설계
-
+<img width="1093" alt="제목 없음" src="https://github.com/armycar/personal_project_board/assets/118254103/e1a5c7fa-a18d-4e0b-a6dd-e1af17206045">
+<img width="1088" alt="제목 없음2" src="https://github.com/armycar/personal_project_board/assets/118254103/6593a1d2-9ef7-4fb1-ac5f-851ee624e004">
