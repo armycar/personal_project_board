@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <router-link to="/">전체글</router-link>   
+    <router-link to="/">Board</router-link>   
   </nav>
   <router-view/>
 </template>

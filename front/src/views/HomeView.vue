@@ -9,27 +9,26 @@
 
   <el-table @row-click="rowClicked" :data="articles" style="width: 100%">
     <el-table-column prop="aiSeq" label="번호" align="center"></el-table-column>
+    <!-- <el-table-column prop="acName" label="카테고리" align="center"></el-table-column> -->
     <el-table-column prop="aiTitle" label="제목" align="center"></el-table-column>
     <el-table-column prop="miNickname" label="작성자" align="center"></el-table-column>
+    <!-- <el-table-column prop="comment" label="댓글수" align="center"></el-table-column> -->
+    <!-- <el-table-column prop="recommend" label="추천수" align="center"></el-table-column> -->
     <el-table-column prop="aiRegDt" label="작성일" align="center"></el-table-column>
     <el-table-column prop="aiView" label="조회수" align="center"></el-table-column>
   </el-table>
 
-  <el-pagination
-    v-if="totalPages > 1"
-    v-model="currentPage"
-    :page-sizes="[5, 10, 15, 20]"
-    :page-size="pageSize"
-    :total="totalItems"
-    layout="prev, pager, next"
-    @size-change="handleSizeChange"
-    @current-change="handlePageChange"
-    class="pagination"
-  ></el-pagination>
-
   <a href="/api/article/write" class="write_btn">
     <img src="/images/write.png">
   </a>
+
+  <el-pagination
+    @current-change="handlePageChange"
+    :current-page="page"
+    :page-size="5"
+    :total="totalPages"
+    layout="prev, pager, next"
+  ></el-pagination>
 </template>
 
 <script>
@@ -39,10 +38,9 @@ import apiBoard from '@/api/board';
 export default {
   data() {
     return {
-      articles: [],
-      currentPage: 1,
-      pageSize: 5,
-      totalItems: 0,
+      articles: null,
+      page: 1,
+      totalPages: 0
     };
   },
   computed: {
@@ -52,45 +50,50 @@ export default {
     username() {
       return sessionStorage.getItem('username');
     },
-    totalPages() {
-      return Math.ceil(this.totalItems / this.pageSize);
-    },
+    getPagerCount() {
+      return Math.ceil(this.totalPages / 5);
+    }
   },
   mounted() {
-    this.getArticles();
+    this.loadArticles();
   },
   methods: {
-    getArticles() {
-      apiBoard.getArticles("all", this.currentPage - 1, this.pageSize)
+    loadArticles() {
+      const type = 'all';
+      const size = 5;
+
+      apiBoard
+        .getArticles(type, this.page-1, size)
         .then((response) => {
-          console.log("getArticles", response);
+          console.log('getArticles', response);
           this.articles = response.data.map((article) => {
             article.aiRegDt = moment(article.aiRegDt).format('YYYY-MM-DD HH:mm:ss');
             return article;
           });
-          this.totalItems = response.headers['x-total-count'];
+          this.totalPages = Math.ceil(response.data.totalCount / size);
         })
-        .catch((error) => {
-          console.error("getArticles", error);
+        .catch((e) => {
+          console.log(e);
         });
     },
-    handlePageChange(currentPage) {
-      this.currentPage = currentPage;
-      this.getArticles();
-    },
-    handleSizeChange(pageSize) {
-      this.pageSize = pageSize;
-      this.currentPage = 1;
-      this.getArticles();
-    },
     rowClicked(row) {
-      this.$router.push({ name: 'ArticleView', params: { id: row.aiSeq } });
+      this.$router.push({
+        path: `/api/article/detail/${row.aiSeq}`
+      });
     },
     logout() {
-      sessionStorage.clear();
-      this.$router.push('/');
+      sessionStorage.removeItem('token');
+      this.$router.go();
+      this.$message({
+        message: '로그아웃 되었습니다',
+        type: 'success'
+      });
     },
-  },
+    handlePageChange(newPage) {
+      this.page = newPage;
+      this.loadArticles();
+    },
+  }
 };
 </script>
 
@@ -104,8 +107,8 @@ export default {
 
 .write_btn {
   position: fixed;
-  bottom: 40px;
-  right: 40px;
+  bottom: 480px;
+  right: 20px;
   width: 48px;
   height: 48px;
   border-radius: 50px;
@@ -114,6 +117,7 @@ export default {
   z-index: 10;
   display: inline-block;
 }
+
 .write_btn img {
   position: relative;
   top: 50%;
@@ -128,6 +132,7 @@ export default {
   z-index: 10;
   display: inline-block;
 }
+
 .login_btn,
 .join_btn,
 .logout_btn,
@@ -140,10 +145,5 @@ export default {
   font-size: 14px;
   text-decoration: none;
   cursor: pointer;
-}
-
-.pagination {
-  margin-top: 16px;
-  text-align: center;
 }
 </style>

@@ -10,7 +10,7 @@
 
           <span>게시물 올리기</span>
 
-          <el-button @click="writeArticle" type="text" class="right-button">저장</el-button>
+          <el-button @click="writeArticle" type="text" class="right-button">등록</el-button>
         </div>
         <br /><br />
 
