@@ -63,14 +63,16 @@ export default {
       const size = 5;
 
       apiBoard
-        .getArticles(type, this.page-1, size)
+        .getArticles(type, this.page - 1, size)
         .then((response) => {
           console.log('getArticles', response);
           this.articles = response.data.map((article) => {
             article.aiRegDt = moment(article.aiRegDt).format('YYYY-MM-DD HH:mm:ss');
             return article;
           });
-          this.totalPages = Math.ceil(response.data.totalCount / size);
+          // 서버로부터 전체 데이터 개수를 받아온다
+          const totalCount = response.headers['x-total-count'];
+          this.totalPages = Math.ceil(totalCount / size);
         })
         .catch((e) => {
           console.log(e);

@@ -11,7 +11,7 @@ export default {
             params: {
                 page:page,
                 size:size
-            }
+            }   
         });
     },
     deleteArticle: function(miSeq, aiSeq) {
