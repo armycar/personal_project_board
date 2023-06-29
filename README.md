@@ -22,7 +22,7 @@
 ### 2. 프로젝트 기능
 
 현재 백엔드와 프론트엔드의 작업이 모두 완료된 주요 기능은 다음과 같습니다
-- **게시판 -** 글쓰기, 글삭제, 조회수, 게시글 전체조회 및 상세조회, 댓글쓰기
+- **게시판 -** 글쓰기, 글삭제, 조회수, 게시글 전체조회 및 상세조회, 댓글쓰기, 추천하기
 - **사용자 -** 회원가입, 로그인, 회원정보 수정, 이메일로 비밀번호 찾기, 회원탈퇴(스케쥴러)
   
 ### 3. 사용 기술
@@ -70,7 +70,7 @@
     <summary>게시판 관련</summary>
     <img width="1271" alt="메인" src="https://github.com/armycar/personal_project_board/assets/118254103/a99e44c5-fe28-4f51-9300-73220cca219d">
     <img width="1071" alt="게시물올리기" src="https://github.com/armycar/personal_project_board/assets/118254103/e0a6202a-d6d3-4e5c-9139-e09a0e2444e9">
-<img width="779" alt="상세보기" src="https://github.com/armycar/personal_project_board/assets/118254103/f306cce4-f9d6-42db-b92f-ba066cbd89c7">
+<img width="1130" alt="상세보기" src="https://github.com/armycar/personal_project_board/assets/118254103/251c8b27-1463-4f75-9872-fb30b666c93a">
   </details>
 
 ## 프로젝트 구조
