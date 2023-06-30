@@ -16,5 +16,8 @@ export default {
     },
     deleteArticle: function(miSeq, aiSeq) {
         return axios.delete(BASE_URL + `/api/article/delete?miSeq=${miSeq}&aiSeq=${aiSeq}`);
+    },
+    recommendArticle: function(miSeq, aiSeq) {
+        return axios.post(BASE_URL + `/api/article/recommend?miSeq=${miSeq}&aiSeq=${aiSeq}`);
     }    
 }

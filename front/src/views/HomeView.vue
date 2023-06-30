@@ -13,9 +13,9 @@
     <el-table-column prop="aiTitle" label="제목" align="center"></el-table-column>
     <el-table-column prop="miNickname" label="작성자" align="center"></el-table-column>
     <!-- <el-table-column prop="comment" label="댓글수" align="center"></el-table-column> -->
-    <!-- <el-table-column prop="recommend" label="추천수" align="center"></el-table-column> -->
     <el-table-column prop="aiRegDt" label="작성일" align="center"></el-table-column>
     <el-table-column prop="aiView" label="조회수" align="center"></el-table-column>
+    <el-table-column prop="recommend" label="추천수" align="center"></el-table-column>
   </el-table>
 
   <a href="/api/article/write" class="write_btn">
