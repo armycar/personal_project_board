@@ -13,7 +13,17 @@
                 <img :src="`http://localhost:9244/api/download/img/article/${image.apFileUrl}`" />
               </div>
             </template>
-                <hr>
+                
+                <a class="recommend_btn" @click="recommendArticle">
+                <img src="/images/thumbsup.png">
+                <br>
+                <br>
+                <br>
+                <span class="lcount">{{ article.lcount }}</span>
+                </a>
+                <br>
+                <br>
+                <br>  
                 <el-main>
                     <h2>댓글</h2>
                     <br>
@@ -65,7 +75,7 @@ export default {
     article: "", 
     formData: {
       detail: ""
-    }
+    },
 }
 },
 
@@ -162,6 +172,23 @@ apiBoard.getArticle(this.$route.params.seq)
               console.log(e);
             });
         },
+        recommendArticle() {
+          if(!this.seqValue) {
+            this.$message.error('로그인이 필요합니다');
+            return;
+          }
+
+            apiBoard.recommendArticle(sessionStorage.getItem('token'), this.article.aiSeq)
+            .then((response) => {
+              console.log(response);
+              window.location.reload();
+            })
+            .catch((error) => {
+              console.log(error);
+              this.$message.error("게시글 추천중 에러발생")
+            })
+          }
+        },
         formatComment(row) {
      if (row.comment && Array.isArray(row.comment)) {
         return row.comment.map(c => `${c.ciDetail}\n${this.formatRegdt(c.ciRegDt)}`).join("\n\n");
@@ -170,7 +197,8 @@ apiBoard.getArticle(this.$route.params.seq)
       }
         }
     }
-}
+
+
 </script>
 
 <style>
@@ -215,12 +243,35 @@ td {
 .img-wrapper img {
   max-width: 100%;
 }
+.recommend_btn {
+   position: fixed;
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%, 50%);
+  width: 80px;
+  height: 80px;
+  border: 0.05px  black;
+  border-radius: 50px;
+  background: #f6f4f4e5;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  
+  display: inline-block;
+  cursor: pointer;
+}
+.recommend_btn img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+}
 hr {
     border: none;
     border-top: 1px solid #bbb;
     margin: 20px 0;
+    margin-bottom: 5px;
 }
-dot {
+dot { 
   display: inline-block;
   width: 5px;
   height: 5px;
