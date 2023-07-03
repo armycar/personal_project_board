@@ -9,21 +9,19 @@
                 <hr>
                 <el-main>{{article.detail}}</el-main>
                   <template v-if="article.img && article.img.length > 0">
-              <div v-for="image in article.img" :key="image.apFileUrl" class="img-wrapper" style="text-align: left;">
-                <img :src="`http://localhost:9244/api/download/img/article/${image.apFileUrl}`" />
+              <div v-for="image in article.img" :key="image.apFileUrl" class="img-wrapper" style="width: 550px; ">
+                <img :src="`http://localhost:9244/api/download/img/article/${image.apFileUrl}`" style="width: 100%; height: 100%; object-fit: cover;"/>
               </div>
             </template>
-                
-                <a class="recommend_btn" @click="recommendArticle">
+                 <a class="recommend_btn" @click="recommendArticle">
                 <img src="/images/thumbsup.png">
                 <br>
                 <br>
                 <br>
                 <span class="lcount">{{ article.lcount }}</span>
                 </a>
-                <br>
-                <br>
-                <br>  
+                  <br>
+                  <br>
                 <el-main>
                     <h2>댓글</h2>
                     <br>
@@ -239,14 +237,18 @@ td {
 }
 .img-wrapper {
   margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 .img-wrapper img {
   max-width: 100%;
 }
 .recommend_btn {
-   position: fixed;
-  bottom: 50%;
-  right: 50%;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
   transform: translate(50%, 50%);
   width: 80px;
   height: 80px;
@@ -256,7 +258,6 @@ td {
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
   z-index: 10;
   
-  display: inline-block;
   cursor: pointer;
 }
 .recommend_btn img {

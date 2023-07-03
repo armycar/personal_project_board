@@ -109,15 +109,14 @@ export default {
 
 .write_btn {
   position: fixed;
-  bottom: 480px;
-  right: 20px;
+  bottom: 50%;
+  right: 5%;
   width: 48px;
   height: 48px;
   border-radius: 50px;
   background: #fc1f49;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
   z-index: 10;
-  display: inline-block;
 }
 
 .write_btn img {
