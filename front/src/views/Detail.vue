@@ -32,6 +32,7 @@
                 <tr v-for="comment in article.comment" :key="comment.ciId">
                     <td>{{ comment.ciDetail }}</td>
                     <td>{{ formatRegdt(comment.ciRegDt) }}</td>
+                    
                 </tr>
                 </tbody>
             </table>
@@ -57,7 +58,9 @@
         <br />
         <el-button @click="goBack">뒤로가기</el-button>
         <el-button v-if="showDeleteButton" @click="deleteArticle">삭제</el-button>
-        <el-button v-if="showUpdateButton" @click="updateArticle">수정</el-button>
+        <el-button v-if="showUpdateButton" class="update-button">
+          <router-link :to="{ path: '/api/article/update', query: { aiSeq: article.aiSeq } }">수정</router-link>
+          </el-button>
         
     </div>
 </template>
@@ -74,11 +77,13 @@ export default {
     formData: {
       detail: ""
     },
+    aiSeq: null
 }
 },
 
 mounted() {
   this.seqValue = sessionStorage.getItem('token');
+  this.aiSeq = null;
 
 apiBoard.getArticle(this.$route.params.seq)
 	.then((response) => {
@@ -97,7 +102,7 @@ apiBoard.getArticle(this.$route.params.seq)
       },
       showUpdateButton() {
         return this.article && this.article.miSeq === +sessionStorage.getItem('token');
-      }
+      },
     },
     methods: {
      
@@ -132,6 +137,9 @@ apiBoard.getArticle(this.$route.params.seq)
         this.$message.error("댓글 작성중 에러발생");
       })
     } , 
+    deleteComment() {
+      
+    },
 
     formatRegdt(regdt) {
     
@@ -202,6 +210,9 @@ apiBoard.getArticle(this.$route.params.seq)
 <style>
 .comment-table-wrapper {
   margin-left: 30px;
+}
+.update-button a{
+  text-decoration: none;
 }
 td {
   padding-right: 100px; /* 원하는 간격으로 조정 */
