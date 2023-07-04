@@ -7,6 +7,7 @@ import JoinView from '../views/JoinView.vue'
 import MyPageView from '../views/MyPageView.vue'
 import SearchPwd from '../views/SearchPwd.vue'
 import UpdateMemberInfo from '../views/UpdateMemberInfo.vue'
+import UpdateView from '../views/UpdateView.vue'
 
 const routes = [
   {
@@ -53,6 +54,11 @@ const routes = [
     path: '/api/member/change/memberInfo',
     name: 'UpdateMemberInfo',
     component: UpdateMemberInfo
+  },
+  {
+    path: '/api/article/update',
+    name: 'UpdateView',
+    component: UpdateView
   }
 ]
 
