@@ -32,9 +32,9 @@
                 <tr v-for="comment in article.comment" :key="comment.ciId">
                     <td>{{ comment.ciDetail }}</td>
                     <td>{{ formatRegdt(comment.ciRegDt) }}</td>
-                    
                 </tr>
                 </tbody>
+                    <el-button v-if="showDeleteCommentButton" @click="deleteComment">삭제</el-button>
             </table>
             </div>
             </template>
@@ -103,6 +103,10 @@ apiBoard.getArticle(this.$route.params.seq)
       showUpdateButton() {
         return this.article && this.article.miSeq === +sessionStorage.getItem('token');
       },
+      showDeleteCommentButton() {
+        return this.article.comment.some(comment =>
+        comment.ciMiSeq === +sessionStorage.getItem('token'));
+      }
     },
     methods: {
      
@@ -137,8 +141,22 @@ apiBoard.getArticle(this.$route.params.seq)
         this.$message.error("댓글 작성중 에러발생");
       })
     } , 
-    deleteComment() {
-      
+    deleteComment(comment) {
+      this.$confirm('정말로 삭제하시겠습니까?','경고', {
+        confirmButtonText: '확인',
+        cancelButtonText: '취소',
+        type: 'warning'
+      })
+      .then(() => {
+        apiBoard.deleteComment(sessionStorage.getItem('token'), comment.ciSeq)
+        this.$message({
+          message: '댓글이 삭제되었습니다',
+          type: 'success'
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
     },
 
     formatRegdt(regdt) {
