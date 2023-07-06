@@ -20,6 +20,7 @@
 
   <a href="/api/article/write" class="write_btn">
     <img src="/images/write.png">
+    <span class="write_text">글쓰기</span>
   </a>
 
   <el-pagination
@@ -110,20 +111,32 @@ export default {
 .write_btn {
   position: fixed;
   bottom: 50%;
-  right: 5%;
+  right: 2%;
   width: 48px;
   height: 48px;
   border-radius: 50px;
   background: #fc1f49;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
   z-index: 10;
+  padding: 1px 30px;
 }
 
 .write_btn img {
   position: relative;
   top: 50%;
-  left: 25%;
+  left: -40%;
   transform: translate(-50%, -55%);
+}
+
+.write_text {
+  position: absolute;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  width: 60px;
+  left: 60%;
+  top: 15px;
+  transform: translateX(-50%);
 }
 
 .username {

@@ -424,25 +424,26 @@ public class ArticleService {
                     .build();
 
             CommentPhotoEntity photo = cpRepo.findByCpCiSeq(ciSeq);
-
-                String oldFileName = photo.getCpFileName();
-                Path oldfolderLocation = Paths.get(comment_image_path);
-                Path oldtargetFile = oldfolderLocation.resolve(oldFileName);
-                try {
-                    Files.delete(oldtargetFile);
-                } catch (Exception e) {
-                    response = BasicResponseVO.builder()
-                            .status(false)
-                            .message("기존 파일 삭제에 실패했습니다")
-                            .code(HttpStatus.BAD_REQUEST)
-                            .build();
-                }
-                cpRepo.delete(photo);
-                response = BasicResponseVO.builder()
-                        .status(true)
-                        .message("삭제가 완료되었습니다")
-                        .code(HttpStatus.OK)
-                        .build();
+if(photo != null) {
+    String oldFileName = photo.getCpFileName();
+    Path oldfolderLocation = Paths.get(comment_image_path);
+    Path oldtargetFile = oldfolderLocation.resolve(oldFileName);
+    try {
+        Files.delete(oldtargetFile);
+    } catch (Exception e) {
+        response = BasicResponseVO.builder()
+                .status(false)
+                .message("기존 파일 삭제에 실패했습니다")
+                .code(HttpStatus.BAD_REQUEST)
+                .build();
+    }
+    cpRepo.delete(photo);
+    response = BasicResponseVO.builder()
+            .status(true)
+            .message("삭제가 완료되었습니다")
+            .code(HttpStatus.OK)
+            .build();
+}
             }
         else {
             response = BasicResponseVO.builder()
