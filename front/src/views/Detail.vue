@@ -32,9 +32,12 @@
                 <tr v-for="comment in article.comment" :key="comment.ciId">
                     <td>{{ comment.ciDetail }}</td>
                     <td>{{ formatRegdt(comment.ciRegDt) }}</td>
+                    <td>
+                    <el-button @click="deleteComment(comment)">삭제</el-button>
+                    </td>
                 </tr>
                 </tbody>
-                    <el-button v-if="showDeleteCommentButton" @click="deleteComment">삭제</el-button>
+                    
             </table>
             </div>
             </template>
@@ -103,10 +106,6 @@ apiBoard.getArticle(this.$route.params.seq)
       showUpdateButton() {
         return this.article && this.article.miSeq === +sessionStorage.getItem('token');
       },
-      showDeleteCommentButton() {
-        return this.article.comment.some(comment =>
-        comment.ciMiSeq === +sessionStorage.getItem('token'));
-      }
     },
     methods: {
      
@@ -142,7 +141,8 @@ apiBoard.getArticle(this.$route.params.seq)
       })
     } , 
     deleteComment(comment) {
-      this.$confirm('정말로 삭제하시겠습니까?','경고', {
+      if (this.seqValue === comment.ciMiSeq) {
+this.$confirm('정말로 삭제하시겠습니까?','경고', {
         confirmButtonText: '확인',
         cancelButtonText: '취소',
         type: 'warning'
@@ -153,10 +153,16 @@ apiBoard.getArticle(this.$route.params.seq)
           message: '댓글이 삭제되었습니다',
           type: 'success'
         });
+        window.location.reload();
       })
       .catch((e) => {
         console.log(e);
       });
+  } else {
+    this.$message.error("댓글 작성자만 삭제가 가능합니다")
+  }
+
+      
     },
 
     formatRegdt(regdt) {

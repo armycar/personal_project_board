@@ -7,4 +7,5 @@ public interface CommentGetVO {
     public Date getCiRegDt();
     public Long getCiAiSeq();
     public Long getCiMiSeq();
+    public Long getCiSeq();
 }
