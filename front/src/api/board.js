@@ -22,5 +22,5 @@ export default {
     },
     deleteComment: function(miSeq, ciSeq) {
         return axios.delete(BASE_URL + `/api/comment/delete?miSeq=${miSeq}&ciSeq=${ciSeq}`);
-    }    
+    } 
 }
