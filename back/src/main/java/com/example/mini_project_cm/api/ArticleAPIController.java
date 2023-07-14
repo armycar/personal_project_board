@@ -73,8 +73,8 @@ public class ArticleAPIController {
         return new ResponseEntity<>(aService.writeComment(data, miSeq, aiSeq), HttpStatus.OK);
     }
     @Operation(summary = "댓글 수정", description = "사용자에게 회원번호와 데이터를 받아 댓글을 수정함")
-    @PatchMapping("/comment/update")
-    public ResponseEntity<BasicResponseVO> commentUpdate(@RequestBody CommentUpdateVO data,
+    @PatchMapping(value = "/comment/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BasicResponseVO> commentUpdate(@ModelAttribute CommentUpdateVO data,
                                                          @Parameter(description = "회원번호", example = "9") @RequestParam Long miSeq,
                                                          @Parameter(description = "댓글번호", example = "2") @RequestParam Long ciSeq) {
         return new ResponseEntity<>(aService.updateComment(data, miSeq, ciSeq),HttpStatus.OK);

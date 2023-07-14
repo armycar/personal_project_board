@@ -30,17 +30,30 @@
             <table>
                 <tbody>
                 <tr v-for="comment in article.comment" :key="comment.ciId">
+                    <td>{{ comment.ciMiSeq }}</td>
                     <td>{{ comment.ciDetail }}</td>
                     <td>{{ formatRegdt(comment.ciRegDt) }}</td>
                     <td>
+                    <el-button @click="editComment(comment)">댓글수정</el-button>
                     <el-button @click="deleteComment(comment)">삭제</el-button>
                     </td>
                 </tr>
-                </tbody>
-                    
+                </tbody> 
             </table>
             </div>
             </template>
+        <div v-if="showModal" class="modal-wrapper">
+      <div class="modal-content">
+        <h3>댓글 수정</h3>
+        <div class="form-group">
+          <textarea class="form-control" rows="5" placeholder="댓글을 입력해주세요" v-model="editFormData.detail"></textarea>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary" @click="updateComment">수정 완료</button>
+          <button class="btn btn-secondary" @click="closeModal">닫기</button>
+        </div>
+      </div>
+    </div>
         <div class="card my-4" style="width: 500px; margin-left: 30px;">
               <div class="card-body">
                   <el-form name="comment-form" @submit.prevent="writeComment">
@@ -76,8 +89,12 @@ export default {
     name: 'DetailPage',
     data() {
     return {
+      showModal: false,
     article: "", 
     formData: {
+      detail: ""
+    },
+    editFormData: {
       detail: ""
     },
     aiSeq: null
@@ -106,9 +123,20 @@ apiBoard.getArticle(this.$route.params.seq)
       showUpdateButton() {
         return this.article && this.article.miSeq === +sessionStorage.getItem('token');
       },
+      showCommentDeleteButton() {
+  if (this.seqValue && this.article && this.article.comment) {
+    return this.article.comment.some(comment => comment.ciMiSeq === +this.seqValue);
+  }
+  return false;
+},
     },
     methods: {
-     
+      editComment(comment) {
+        this.editFormData = {
+          detail: comment.ciDetail,
+        }
+        this.showModal = true;
+      },
     writeComment() {
       if(!this.formData.detail) {
         this.$message.error("내용을 입력해주세요");
@@ -141,8 +169,8 @@ apiBoard.getArticle(this.$route.params.seq)
       })
     } , 
     deleteComment(comment) {
-      if (this.seqValue === comment.ciMiSeq) {
-this.$confirm('정말로 삭제하시겠습니까?','경고', {
+      if (parseInt(this.seqValue) === comment.ciMiSeq) {
+        this.$confirm('정말로 삭제하시겠습니까?','경고', {
         confirmButtonText: '확인',
         cancelButtonText: '취소',
         type: 'warning'
@@ -161,8 +189,39 @@ this.$confirm('정말로 삭제하시겠습니까?','경고', {
   } else {
     this.$message.error("댓글 작성자만 삭제가 가능합니다")
   }
-
+    },
+    updateComment(comment) {
+      if(parseInt(this.seqValue) === comment.ciMiSeq) {
+        const formData = new FormData();
+      formData.append("detail", this.editFormData.detail);
       
+         axios
+        .patch(`http://localhost:9244/api/article/update?miSeq=${this.seqValue}&ciSeq=${comment.ciSeq}`, 
+        formData, 
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+        )
+        .then((response) => {
+          console.log(response);
+          this.$router.push({ path: '/' });
+          this.$message({
+          message: '댓글이 수정 되었습니다',
+          type: 'success'
+        })
+      window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$message.error("게시물 수정중 에러발생");
+        });
+      }
+      else {
+        this.$message.error("댓글 작성자만 수정이 가능합니다")
+      }
+     
     },
 
     formatRegdt(regdt) {
