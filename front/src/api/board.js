@@ -11,8 +11,8 @@ export default {
             params: {
                 page:page,
                 size:size
-            }   
-        });
+            }
+        })
     },
     deleteArticle: function(miSeq, aiSeq) {
         return axios.delete(BASE_URL + `/api/article/delete?miSeq=${miSeq}&aiSeq=${aiSeq}`);

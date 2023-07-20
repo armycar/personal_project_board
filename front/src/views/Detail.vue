@@ -34,7 +34,7 @@
                     <td>{{ comment.ciDetail }}</td>
                     <td>{{ formatRegdt(comment.ciRegDt) }}</td>
                     <td>
-                    <el-button @click="editComment(comment)">댓글수정</el-button>
+                    <el-button @click="editComment(comment)">수정</el-button>
                     <el-button @click="deleteComment(comment)">삭제</el-button>
                     </td>
                 </tr>
@@ -49,7 +49,7 @@
           <textarea class="form-control" rows="5" placeholder="댓글을 입력해주세요" v-model="editFormData.detail"></textarea>
         </div>
         <div class="button-group">
-          <button class="btn btn-primary" @click="updateComment">수정 완료</button>
+          <button class="btn btn-primary" @click="updateComment(comment)">수정 완료</button>
           <button class="btn btn-secondary" @click="closeModal">닫기</button>
         </div>
       </div>
@@ -131,11 +131,15 @@ apiBoard.getArticle(this.$route.params.seq)
 },
     },
     methods: {
+      closeModal() {
+        this.showModal = false;
+      },
       editComment(comment) {
         this.editFormData = {
           detail: comment.ciDetail,
         }
         this.showModal = true;
+        this.selectedComment = comment;
       },
     writeComment() {
       if(!this.formData.detail) {
@@ -190,13 +194,13 @@ apiBoard.getArticle(this.$route.params.seq)
     this.$message.error("댓글 작성자만 삭제가 가능합니다")
   }
     },
-    updateComment(comment) {
+    updateComment() {
+      const comment = this.selectedComment;
       if(parseInt(this.seqValue) === comment.ciMiSeq) {
         const formData = new FormData();
       formData.append("detail", this.editFormData.detail);
-      
          axios
-        .patch(`http://localhost:9244/api/article/update?miSeq=${this.seqValue}&ciSeq=${comment.ciSeq}`, 
+        .patch(`http://localhost:9244/api/comment/update?miSeq=${this.seqValue}&ciSeq=${comment.ciSeq}`, 
         formData, 
         {
           headers: {
@@ -206,7 +210,6 @@ apiBoard.getArticle(this.$route.params.seq)
         )
         .then((response) => {
           console.log(response);
-          this.$router.push({ path: '/' });
           this.$message({
           message: '댓글이 수정 되었습니다',
           type: 'success'
