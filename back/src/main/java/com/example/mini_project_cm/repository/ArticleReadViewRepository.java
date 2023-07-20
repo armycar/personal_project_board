@@ -2,6 +2,7 @@ package com.example.mini_project_cm.repository;
 
 import com.example.mini_project_cm.entity.ArticleReadViewEntity;
 import com.example.mini_project_cm.vo.article.ArticleReadVO;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

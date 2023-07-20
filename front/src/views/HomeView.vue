@@ -23,6 +23,7 @@
     <span class="write_text">글쓰기</span>
   </a>
 
+  <div class="pagination-container">
   <el-pagination
     @current-change="handlePageChange"
     :current-page="page"
@@ -30,6 +31,7 @@
     :total="totalPages"
     layout="prev, pager, next"
   ></el-pagination>
+  </div>
 </template>
 
 <script>
@@ -71,8 +73,8 @@ export default {
             article.aiRegDt = moment(article.aiRegDt).format('YYYY-MM-DD HH:mm:ss');
             return article;
           });
-          // 서버로부터 전체 데이터 개수를 받아온다
           const totalCount = response.headers['x-total-count'];
+          console.log('totalCount', totalCount)
           this.totalPages = Math.ceil(totalCount / size);
         })
         .catch((e) => {
@@ -110,10 +112,10 @@ export default {
 
 .write_btn {
   position: fixed;
-  bottom: 50%;
+  bottom: 52%;
   right: 2%;
   width: 48px;
-  height: 48px;
+  height: 35px;
   border-radius: 50px;
   background: #fc1f49;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
@@ -135,7 +137,7 @@ export default {
   text-align: center;
   width: 60px;
   left: 60%;
-  top: 15px;
+  top: 10px;
   transform: translateX(-50%);
 }
 
@@ -159,5 +161,11 @@ export default {
   font-size: 14px;
   text-decoration: none;
   cursor: pointer;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 }
 </style>

@@ -9,6 +9,7 @@ import com.example.mini_project_cm.vo.comment.CommentUpdateVO;
 import com.example.mini_project_cm.vo.comment.CommentWriteVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -112,10 +113,10 @@ public class ArticleService {
 
     //게시글 전체 조회
     public List<ArticleReadVO> readArticle(String type, String keyword, Integer page, Integer size) {
-        List<ArticleReadVO> response = null;
         if (page == null) page = 0;
         if (size == null) size = 10;
         PageRequest pageRequest = PageRequest.of(page , size, Sort.by("aiRegDt").descending());
+        List<ArticleReadVO> response = null;
 
         if (type.equals("all")) {
             response = rvRepo.findAll(pageRequest);
