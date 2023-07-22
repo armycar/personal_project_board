@@ -28,8 +28,9 @@
     @current-change="handlePageChange"
     :current-page="page"
     :page-size="5"
-    :total="totalPages"
+    :total="totalPages * 5"
     layout="prev, pager, next"
+
   ></el-pagination>
   </div>
 </template>
@@ -66,16 +67,18 @@ export default {
       const size = 5;
 
       apiBoard
-        .getArticles(type, this.page - 1, size)
+        .getArticles(type, this.page-1, size)
         .then((response) => {
           console.log('getArticles', response);
-          this.articles = response.data.map((article) => {
+          this.articles = response.data.content.map((article) => {
             article.aiRegDt = moment(article.aiRegDt).format('YYYY-MM-DD HH:mm:ss');
             return article;
           });
-          const totalCount = response.headers['x-total-count'];
-          console.log('totalCount', totalCount)
+          const totalCount = response.data.totalElements;
           this.totalPages = Math.ceil(totalCount / size);
+
+          console.log(totalCount)
+          console.log(this.page)
         })
         .catch((e) => {
           console.log(e);

@@ -10,4 +10,5 @@ public interface CommentInfoRepository extends JpaRepository<CommentInfoEntity, 
     public CommentInfoEntity findByCiSeq(Long ciSeq);
     public List<CommentInfoEntity> findAllByCiAiSeq(Long ciAiSeq);
     public List<CommentGetVO> findByCiAiSeq(Long ciAiSeq);
+    public List<CommentGetVO> findByCiMiSeq(Long seq);
 }
