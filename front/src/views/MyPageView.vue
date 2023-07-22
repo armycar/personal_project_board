@@ -11,6 +11,8 @@
         <p><span class="highlight">닉네임</span>  {{nickname}}</p>
         <p> {{email}} </p>
         <div class="button-wrapper">
+        <span>작성글관리</span>
+        <span style="margin-left: 20px; margin-right: 20px;">|</span>    
         <span><a href="/api/member/change/memberInfo" style="text-decoration: none;">회원정보변경</a></span> 
         <span style="margin-left: 20px; margin-right: 20px;">|</span>
         <span @click="confirmLeaveMember" style="text-decoration: none;">회원탈퇴</span>

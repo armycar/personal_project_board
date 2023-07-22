@@ -112,11 +112,11 @@ public class ArticleService {
     }
 
     //게시글 전체 조회
-    public List<ArticleReadVO> readArticle(String type, String keyword, Integer page, Integer size) {
+    public Page<ArticleReadVO> readArticle(String type, String keyword, Integer page, Integer size) {
         if (page == null) page = 0;
-        if (size == null) size = 10;
+        if (size == null) size = 5;
         PageRequest pageRequest = PageRequest.of(page , size, Sort.by("aiRegDt").descending());
-        List<ArticleReadVO> response = null;
+        Page<ArticleReadVO> response = null;
 
         if (type.equals("all")) {
             response = rvRepo.findAll(pageRequest);

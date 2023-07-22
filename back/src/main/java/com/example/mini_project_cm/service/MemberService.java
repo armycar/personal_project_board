@@ -1,13 +1,14 @@
 package com.example.mini_project_cm.service;
 
+import com.example.mini_project_cm.entity.ArticleInfoEntity;
 import com.example.mini_project_cm.entity.MemberInfoEntity;
 import com.example.mini_project_cm.entity.MemberPhotoEntity;
 import com.example.mini_project_cm.entity.MyPageViewEntity;
-import com.example.mini_project_cm.repository.MemberInfoRepository;
-import com.example.mini_project_cm.repository.MemberPhotoRepository;
-import com.example.mini_project_cm.repository.MyPageViewRepository;
+import com.example.mini_project_cm.repository.*;
 import com.example.mini_project_cm.utils.AESAlgorithm;
 import com.example.mini_project_cm.vo.BasicResponseVO;
+import com.example.mini_project_cm.vo.article.ArticleGetVO;
+import com.example.mini_project_cm.vo.comment.CommentGetVO;
 import com.example.mini_project_cm.vo.member.*;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -25,6 +26,7 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Service
@@ -34,6 +36,8 @@ public class MemberService {
     private final MemberPhotoRepository mpRepo;
     private final JavaMailSender javaMailSender;
     private final MyPageViewRepository mvRepo;
+    private final ArticleInfoRepository aiRepo;
+    private final CommentInfoRepository ciRepo;
 
     @Value("${file.image.member}") String member_image_path;
 
@@ -287,7 +291,6 @@ public class MemberService {
         return response;
     }
 
-
     //회원 이미지 추가
     public BasicResponseVO insertMemberPhoto(MemberImageVO data) {
         BasicResponseVO response = new BasicResponseVO();
@@ -460,6 +463,53 @@ public class MemberService {
                     .url(member.getMpFileUrl())
                     .build();
         }
+        return response;
+    }
+    // 작성한 게시글 보기
+    public MemberArticleVO getMemberArticle(Long seq) {
+        MemberArticleVO response = new MemberArticleVO();
+
+        List<ArticleGetVO> article = aiRepo.findByAiMiSeq(seq);
+        if(article==null) {
+            response = MemberArticleVO.builder()
+                    .status(false)
+                    .message("작성한 게시글이 없습니다")
+                    .code(HttpStatus.BAD_REQUEST)
+                    .build();
+        }
+        else {
+            response = MemberArticleVO.builder()
+                    .article(article)
+                    .status(true)
+                    .message("조회에 성공 하였습니다")
+                    .code(HttpStatus.OK)
+                    .build();
+        }
+
+        return response;
+    }
+
+    // 작성한 댓글 보기
+    public MemberCommentVO getMemberComment(Long seq) {
+        MemberCommentVO response = new MemberCommentVO();
+
+        List<CommentGetVO> comment = ciRepo.findByCiMiSeq(seq);
+        if(comment==null) {
+            response = MemberCommentVO.builder()
+                    .status(false)
+                    .message("작성한 댓글이 없습니다")
+                    .code(HttpStatus.BAD_REQUEST)
+                    .build();
+        }
+        else {
+            response = MemberCommentVO.builder()
+                    .comment(comment)
+                    .status(true)
+                    .message("조회에 성공 하였습니다")
+                    .code(HttpStatus.OK)
+                    .build();
+        }
+
         return response;
     }
 }

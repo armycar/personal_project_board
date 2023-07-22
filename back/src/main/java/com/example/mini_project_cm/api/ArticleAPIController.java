@@ -2,10 +2,7 @@ package com.example.mini_project_cm.api;
 
 import com.example.mini_project_cm.service.ArticleService;
 import com.example.mini_project_cm.vo.BasicResponseVO;
-import com.example.mini_project_cm.vo.article.ArticleDetailVO;
-import com.example.mini_project_cm.vo.article.ArticleReadVO;
-import com.example.mini_project_cm.vo.article.ArticleUpdateVO;
-import com.example.mini_project_cm.vo.article.ArticleWriteVO;
+import com.example.mini_project_cm.vo.article.*;
 import com.example.mini_project_cm.vo.comment.CommentUpdateVO;
 import com.example.mini_project_cm.vo.comment.CommentWriteVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,14 +34,14 @@ public class ArticleAPIController {
     }
     @Operation(summary = "게시글 전체조회", description = "게시글 리스트와 페이지 정보를 보여줌")
     @GetMapping("/article/read/{type}")
-    public ResponseEntity<List<ArticleReadVO>> searchArticle(
-           @Parameter(description = "검색타입 = all(전체) / author(글쓴이) / title(제목) / detail(내용)", example = "all") @PathVariable String type,
-           @RequestParam(required = false, value = "keyword") String keyword,
-           @RequestParam @Nullable Integer page,
-           @RequestParam @Nullable Integer size
+    public ResponseEntity<Page<ArticleReadVO>> searchArticle(
+            @Parameter(description = "검색타입 = all(전체) / author(글쓴이) / title(제목) / detail(내용)", example = "all") @PathVariable String type,
+            @RequestParam(required = false, value = "keyword") String keyword,
+            @RequestParam @Nullable Integer page,
+            @RequestParam @Nullable Integer size
     )
     {
-        List<ArticleReadVO> response = aService.readArticle(type, keyword, page, size);
+        Page<ArticleReadVO> response = aService.readArticle(type, keyword, page, size);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @Operation(summary = "게시글 상세조회", description = "사용자에게 게시글 번호를 받아서 게시글의 상세정보를 조회한다")
