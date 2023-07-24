@@ -76,10 +76,10 @@
 <img width="1135" alt="상세보기" src="https://github.com/armycar/personal_project_board/assets/118254103/e98fbaee-25e6-4640-bcf2-ac4e2e9a9ebd">
   </details>
 
-## 5. 프로젝트 구조
-### 5-1 DB 설계
+### 5. 프로젝트 구조
+#### 5-1 DB 설계
 ![image](https://github.com/armycar/personal_project_board/assets/118254103/2149da5f-5217-4137-a00a-ff0c709cc3d2)
 
-### 5-2 API 설계
+#### 5-2 API 설계
 <img width="1093" alt="제목 없음" src="https://github.com/armycar/personal_project_board/assets/118254103/e1a5c7fa-a18d-4e0b-a6dd-e1af17206045">
 <img width="1088" alt="제목 없음2" src="https://github.com/armycar/personal_project_board/assets/118254103/6593a1d2-9ef7-4fb1-ac5f-851ee624e004">
