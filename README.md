@@ -22,8 +22,8 @@
 ### 2. 프로젝트 기능
 
 현재 백엔드와 프론트엔드의 작업이 모두 완료된 주요 기능은 다음과 같습니다
-- **게시판 -** 게시글CRUD, 댓글CRUD, 조회수, 게시글 전체조회 및 상세조회, 추천하기
-- **사용자 -** 회원가입, 로그인, 회원정보 수정, 이메일로 비밀번호 찾기, 회원탈퇴(스케쥴러)
+- **게시판 -** 게시글CRUD, 댓글CRUD, 조회수, 전체조회 및 상세조회, 추천하기, 페이징
+- **사용자 -** 회원CRUD, 이메일로 비밀번호 찾기, 마이페이지 및 작성글관리
   
 ### 3. 사용 기술
 
@@ -61,9 +61,12 @@
 
   <img width="316" alt="비밀번호찾기" src="https://github.com/armycar/personal_project_board/assets/118254103/98c8d418-8ba0-4a52-b8c3-62951a28b926">
 
-<img width="186" alt="마이페이지" src="https://github.com/armycar/personal_project_board/assets/118254103/5547311c-b650-4cc0-8731-6dce3bfb4e7f">
-
 <img width="249" alt="회원정보변경" src="https://github.com/armycar/personal_project_board/assets/118254103/254a9ab0-4fb0-47ac-9c5e-057f81883e5e">
+
+<img width="393" alt="마이페이지" src="https://github.com/armycar/personal_project_board/assets/118254103/4d36e5ac-eae2-4b2f-a376-27e6b7e37edc">
+
+<img width="1278" alt="작성글관리" src="https://github.com/armycar/personal_project_board/assets/118254103/0185861c-c678-439e-ba50-dae69ddaf535">
+
   </details>
   <br>
   <details>
