@@ -10,9 +10,9 @@
   - [실행 화면](#4-실행-화면)
 
    
-- [프로젝트 구조](#프로젝트-구조)
-  - [DB 설계](#1-DB-설계)
-  - [API 설계](#2-API-설계)   
+- [프로젝트 구조](#5-프로젝트-구조)
+  - [DB 설계](#5-1-DB-설계)
+  - [API 설계](#5-2-API-설계)   
 
 ## 들어가며
 ### 1. 프로젝트 소개
@@ -73,7 +73,7 @@
     <summary>게시판 관련</summary>
     <img width="1262" alt="메인" src="https://github.com/armycar/personal_project_board/assets/118254103/9a294811-dc9d-42be-b2b0-f516867737ef">
     <img width="1071" alt="게시물올리기" src="https://github.com/armycar/personal_project_board/assets/118254103/e0a6202a-d6d3-4e5c-9139-e09a0e2444e9">
-<img width="1170" alt="상세보기" src="https://github.com/armycar/personal_project_board/assets/118254103/2094fc8c-4f92-4e8a-be17-a631a47a6010">
+<img width="1135" alt="상세보기" src="https://github.com/armycar/personal_project_board/assets/118254103/e98fbaee-25e6-4640-bcf2-ac4e2e9a9ebd">
   </details>
 
 ## 프로젝트 구조
