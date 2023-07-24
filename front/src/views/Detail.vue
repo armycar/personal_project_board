@@ -5,7 +5,23 @@
         <el-col :span="20">
             <el-container>
                 <el-header><h3>{{ article.category ? "[" + article.category + "]" : "" }} {{ article.title }}</h3></el-header>
-                <el-main><h1>{{article.nickname}}</h1> <div class="dot"></div> {{ formatRegdt(article.regdt) }}</el-main>
+              <el-main>
+  <div style="display: flex; align-items: center; ">
+    <div v-if="article.url === null">
+      <div style="width: 70px; height: 70px; margin-right: 10px; margin-top: 20px; border-radius: 50%; background-color: white; border: 0.1px solid black;"></div>
+    </div>
+    <div v-else>
+      <img :src="`http://localhost:9244/api/download/img/member/${article.url}`" style="width: 70px; height: 70px; margin-right: 10px; margin-top: 20px; object-fit: cover; border-radius: 50%; border: 0.1px solid black;">
+    </div>
+    <div>
+      <h1>{{article.nickname}}</h1>
+      <div class="dot"></div>
+      <span>{{ formatRegdt(article.regdt) }}</span>
+    </div>
+  </div>
+</el-main>
+
+
                 <hr>
                 <el-main>{{article.detail}}</el-main>
                   <template v-if="article.img && article.img.length > 0">
@@ -30,7 +46,7 @@
             <table>
                 <tbody>
                 <tr v-for="comment in article.comment" :key="comment.ciId">
-                    <td>{{ comment.ciMiSeq }}</td>
+                    <!-- <td>{{ comment.ciMiSeq }}</td> -->
                     <td>{{ comment.ciDetail }}</td>
                     <td>{{ formatRegdt(comment.ciRegDt) }}</td>
                     <td>

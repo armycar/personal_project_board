@@ -8,4 +8,5 @@ public interface CommentGetVO {
     public Long getCiAiSeq();
     public Long getCiMiSeq();
     public Long getCiSeq();
+//    public String getMiNickName();
 }

@@ -26,4 +26,5 @@ public class ArticleReadViewEntity {
     @Column(name = "ai_view") private Integer   aiView;
     @Column(name = "comment") private Integer   comment;
     @Column(name = "recommend") private Integer recommend;
+    @Column(name = "mp_file_url") private String mpFileUrl;
 }

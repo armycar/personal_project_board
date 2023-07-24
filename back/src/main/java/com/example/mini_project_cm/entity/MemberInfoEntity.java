@@ -22,5 +22,4 @@ public class MemberInfoEntity {
     @Column(name = "mi_status") private Integer miStatus;
     @Column(name = "mi_reg_dt") @ColumnDefault("CURRENT_TIMESTAMP") private Date miRegDt;
     @Column(name = "mi_leave_dt") private Date miLeaveDt;
-
 }
