@@ -81,5 +81,7 @@
 ![image](https://github.com/armycar/personal_project_board/assets/118254103/2149da5f-5217-4137-a00a-ff0c709cc3d2)
 
 #### 5-2 API 설계
-<img width="1093" alt="제목 없음" src="https://github.com/armycar/personal_project_board/assets/118254103/e1a5c7fa-a18d-4e0b-a6dd-e1af17206045">
-<img width="1088" alt="제목 없음2" src="https://github.com/armycar/personal_project_board/assets/118254103/6593a1d2-9ef7-4fb1-ac5f-851ee624e004">
+<img width="1090" alt="파일관리" src="https://github.com/armycar/personal_project_board/assets/118254103/0a07e9bd-f222-4bf7-87d7-c3b8e6518f68">
+<img width="1101" alt="게시글관리" src="https://github.com/armycar/personal_project_board/assets/118254103/7c070fa9-b9b6-4a58-965a-75c48d8437a5">
+<img width="1086" alt="회원관리" src="https://github.com/armycar/personal_project_board/assets/118254103/a851b000-6cd5-464e-b682-fd2ed3c91cbe">
+
