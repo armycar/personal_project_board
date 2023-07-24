@@ -23,6 +23,7 @@ public class ArticleDetailVO {
     private Long aiSeq;
     private Long miSeq;
     private Integer lcount; //좋아요수
+    private String url;
 
     private List<ArticleImgGetVO> img;
     private List<CommentGetVO> comment;

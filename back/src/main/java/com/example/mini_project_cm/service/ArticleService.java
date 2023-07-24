@@ -162,6 +162,7 @@ public class ArticleService {
                     .lcount(detail.getRecommend())
                     .comment(comment)
                     .img(img)
+                    .url(detail.getMpFileUrl())
                     .status(true)
                     .message("조회 하였습니다")
                     .code(HttpStatus.OK)
