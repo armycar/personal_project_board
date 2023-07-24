@@ -99,6 +99,7 @@ methods: {
         }
         else {
           this.$message.success('정보변경이 완료되었습니다')
+          this.$router.push('/');
         }
       })
       .catch(error => {

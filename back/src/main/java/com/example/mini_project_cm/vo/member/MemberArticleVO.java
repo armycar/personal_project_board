@@ -12,7 +12,7 @@ import java.util.List;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class MemberArticleVO {
-    private List<ArticleGetVO> article;
+    private List<ArticleGetVO> articles;
     @Schema(description = "성공(true)/실패(false)", example = "true")
     private Boolean status;
     @Schema(description = "메세지", example = "message")

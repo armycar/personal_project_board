@@ -479,7 +479,7 @@ public class MemberService {
         }
         else {
             response = MemberArticleVO.builder()
-                    .article(article)
+                    .articles(article)
                     .status(true)
                     .message("조회에 성공 하였습니다")
                     .code(HttpStatus.OK)
@@ -503,7 +503,7 @@ public class MemberService {
         }
         else {
             response = MemberCommentVO.builder()
-                    .comment(comment)
+                    .comments(comment)
                     .status(true)
                     .message("조회에 성공 하였습니다")
                     .code(HttpStatus.OK)

@@ -69,12 +69,12 @@ public class MemberAPIController {
         return new ResponseEntity<>(mService.getMemberInfo(seq), HttpStatus.OK);
     }
     @Operation(summary = "마이페이지 게시글출력", description = "회원번호를 통해 회원이 쓴 게시글을 출력합니다")
-    @GetMapping("/get/memberArticle/{seq}")
+    @GetMapping("/get/memberInfo/article/{seq}")
     public ResponseEntity<MemberArticleVO> memberGetArticle(@PathVariable Long seq) {
         return new ResponseEntity<>(mService.getMemberArticle(seq), HttpStatus.OK);
     }
     @Operation(summary = "마이페이지 댓글출력", description = "회원번호를 통해 회원이 쓴 댓글을 출력합니다")
-    @GetMapping("/get/memberComment/{seq}")
+    @GetMapping("/get/memberInfo/comment/{seq}")
     public ResponseEntity<MemberCommentVO> memberGetComment(@PathVariable Long seq) {
         return new ResponseEntity<>(mService.getMemberComment(seq), HttpStatus.OK);
     }

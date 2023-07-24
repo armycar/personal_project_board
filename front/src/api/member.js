@@ -52,4 +52,10 @@ export default {
         };
         return axios.post(BASE_URL+`/api/member/search/pwd`, data);
     },
+    getMemberArticle: function(seq) {
+        return axios.get(BASE_URL+`/api/member/get/memberInfo/article/${seq}`);
+    },
+    getMemberComment: function(seq) {
+        return axios.get(BASE_URL+`/api/member/get/memberInfo/comment/${seq}`);
+    }
 }
