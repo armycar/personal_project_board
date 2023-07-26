@@ -1,7 +1,7 @@
 <template>
-  <nav>
+  <!-- <nav>
     <router-link to="/">Board</router-link>   
-  </nav>
+  </nav> -->
   <router-view/>
 </template>
 

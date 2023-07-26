@@ -1,4 +1,13 @@
 <template>
+<b-navbar toggleable="lg" type="dark" variant="success">
+    <b-navbar-brand href="/">Board</b-navbar-brand>
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+    </b-collapse>
+  </b-navbar>
+  <br><br>
     <div>
        <el-row>
         <el-col :span="2"></el-col>
@@ -70,17 +79,14 @@
         </div>
       </div>
     </div>
-        <div class="card my-4" style="width: 500px; margin-left: 30px;">
-              <div class="card-body">
-                  <el-form name="comment-form" @submit.prevent="writeComment">
-                      <div class="form-group">
-                        <textarea class="form-control" rows="5" placeholder="댓글을 입력해주세요" v-model="formData.detail" style="width: 500px;" >
-                        </textarea>
-                      </div>
-                      <button type="submit" class="btn btn-primary">등록</button>
-                  </el-form>
-              </div>
+    <div class="comment-form-wrapper">
+            <el-form name="comment-form" @submit.prevent="writeComment" class="comment-form">
+          <div class="form-group">
+            <textarea class="form-control" rows="5" placeholder="댓글을 입력해주세요" v-model="formData.detail"></textarea>
           </div>
+          <button type="submit" class="btn btn-primary">등록</button>
+        </el-form>
+    </div>
         </el-main>
             </el-container>
             </el-col>
@@ -151,11 +157,15 @@ apiBoard.getArticle(this.$route.params.seq)
         this.showModal = false;
       },
       editComment(comment) {
-        this.editFormData = {
-          detail: comment.ciDetail,
-        }
+        if (parseInt(this.seqValue) === comment.ciMiSeq) {
+          this.editFormData = {
+            detail: comment.ciDetail,
+          };
         this.showModal = true;
         this.selectedComment = comment;
+        }else {
+          this.$message.error("댓글작성자만 수정이 가능합니다")
+        }
       },
     writeComment() {
       if(!this.formData.detail) {
@@ -394,4 +404,13 @@ dot {
   border-radius: 50%;
   background-color: black;
 }
+.comment-form-wrapper {
+  width: 500px;
+  margin-left: 2%;
+}
+
+.lcount {
+  text-decoration: none;
+}
+
 </style>

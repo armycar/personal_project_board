@@ -1,6 +1,24 @@
 <template>
+<div>
+  <b-navbar toggleable="lg" type="light" variant="success">
+    <b-navbar-brand href="/">Board</b-navbar-brand>
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+
+        <b-navbar-nav style="margin-left: auto;">
+          <b-nav-form >
+            <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+            <b-button size="sm" class="my-2 my-sm-0" type="submit" >Search</b-button>
+          </b-nav-form>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+</div>
+
   <div class="top-nav">
-    <a v-if="isLoggedIn" class="username">{{ username }}님 안녕하세요</a>
+    <!-- <a v-if="isLoggedIn" class="username">{{ username }}님 안녕하세요</a> -->
     <router-link v-if="isLoggedIn" to="/mypage" class="mypage_btn">마이페이지</router-link>
     <a v-if="isLoggedIn" href="#" class="logout_btn" @click="logout">로그아웃</a>
     <a v-if="!isLoggedIn" href="/api/member/join" class="join_btn">회원가입</a>
@@ -18,10 +36,10 @@
     <el-table-column prop="recommend" label="추천수" align="center"></el-table-column>
   </el-table>
 
-  <a href="/api/article/write" class="write_btn">
-    <img src="/images/write.png">
+  <a v-if="isLoggedIn" href="/api/article/write" class="write_btn">
     <span class="write_text">글쓰기</span>
   </a>
+  
 
   <div class="pagination-container">
   <el-pagination
@@ -115,9 +133,9 @@ export default {
 
 .write_btn {
   position: fixed;
-  bottom: 52%;
+  bottom: 56%;
   right: 2%;
-  width: 48px;
+  width: 88px;
   height: 35px;
   border-radius: 50px;
   background: #fc1f49;
@@ -129,7 +147,7 @@ export default {
 .write_btn img {
   position: relative;
   top: 50%;
-  left: -40%;
+  left: 2%;
   transform: translate(-50%, -55%);
 }
 
@@ -139,7 +157,7 @@ export default {
   color: #fff;
   text-align: center;
   width: 60px;
-  left: 60%;
+  left: 50%;
   top: 10px;
   transform: translateX(-50%);
 }
@@ -170,5 +188,11 @@ export default {
   display: flex;
   justify-content: center;
   margin: 20px 0;
+}
+
+.b-navbar-brand,
+.b-nav-form,
+.b-button {
+  font-size: 28px;
 }
 </style>

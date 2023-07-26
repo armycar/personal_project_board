@@ -1,4 +1,13 @@
 <template>
+<b-navbar toggleable="lg" type="dark" variant="success">
+    <b-navbar-brand href="/">Board</b-navbar-brand>
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+    </b-collapse>
+  </b-navbar>
+  <br><br>
   <div>
     <span style="font-size: 18px;">비밀번호 찾기</span>
     <br><br>

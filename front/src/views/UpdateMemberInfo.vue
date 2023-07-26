@@ -1,4 +1,13 @@
 <template>
+<b-navbar toggleable="lg" type="dark" variant="success">
+    <b-navbar-brand href="/">Board</b-navbar-brand>
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+    </b-collapse>
+  </b-navbar>
+  <br><br>
   <span style="font-size: 18px;">회원정보 변경</span>
 
   <br><br>
