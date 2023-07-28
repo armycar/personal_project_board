@@ -1,11 +1,11 @@
 <template>
 <div>
-  <b-navbar toggleable="lg" type="light" variant="success">
+  <b-navbar toggleable="lg" type="dark" variant="info">
     <b-navbar-brand href="/">Board</b-navbar-brand>
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-    <b-collapse id="nav-collapse" is-nav>
+<b-navbar-nav>
+        <a v-if="isLoggedIn" class="username">{{ username }}님 안녕하세요</a>
+      </b-navbar-nav>
 
         <b-navbar-nav style="margin-left: auto;">
           <b-nav-form >
@@ -13,12 +13,12 @@
             <b-button size="sm" class="my-2 my-sm-0" type="submit" >Search</b-button>
           </b-nav-form>
       </b-navbar-nav>
-    </b-collapse>
+
+
   </b-navbar>
 </div>
 
   <div class="top-nav">
-    <!-- <a v-if="isLoggedIn" class="username">{{ username }}님 안녕하세요</a> -->
     <router-link v-if="isLoggedIn" to="/mypage" class="mypage_btn">마이페이지</router-link>
     <a v-if="isLoggedIn" href="#" class="logout_btn" @click="logout">로그아웃</a>
     <a v-if="!isLoggedIn" href="/api/member/join" class="join_btn">회원가입</a>
@@ -163,11 +163,11 @@ export default {
 }
 
 .username {
-  position: fixed;
-  top: 20px;
-  right: 50px; /* 로그아웃 버튼 너비(64px) + 간격(4px) */
-  z-index: 10;
-  display: inline-block;
+  margin-right: 16px;
+  padding: 8px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .login_btn,
@@ -194,5 +194,6 @@ export default {
 .b-nav-form,
 .b-button {
   font-size: 28px;
+  color: #fff;
 }
 </style>

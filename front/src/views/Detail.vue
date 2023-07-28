@@ -1,36 +1,36 @@
 <template>
-<b-navbar toggleable="lg" type="dark" variant="success">
+<b-navbar toggleable="lg" type="dark" variant="info">
     <b-navbar-brand href="/">Board</b-navbar-brand>
-
+<b-navbar-nav>
+        <a v-if="isLoggedIn" class="username">{{ username }}님 안녕하세요</a>
+      </b-navbar-nav>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
     </b-collapse>
   </b-navbar>
   <br><br>
-    <div>
-       <el-row>
-        <el-col :span="2"></el-col>
-        <el-col :span="20">
-            <el-container>
-                <el-header><h3>{{ article.category ? "[" + article.category + "]" : "" }} {{ article.title }}</h3></el-header>
-              <el-main>
-  <div style="display: flex; align-items: center; ">
-    <div v-if="article.url === null">
-      <div style="width: 70px; height: 70px; margin-right: 10px; margin-top: 20px; border-radius: 50%; background-color: white; border: 0.1px solid black;"></div>
-    </div>
-    <div v-else>
-      <img :src="`http://localhost:9244/api/download/img/member/${article.url}`" style="width: 70px; height: 70px; margin-right: 10px; margin-top: 20px; object-fit: cover; border-radius: 50%; border: 0.1px solid black;">
-    </div>
-    <div>
-      <h1>{{article.nickname}}</h1>
-      <div class="dot"></div>
-      <span>{{ formatRegdt(article.regdt) }}</span>
-    </div>
-  </div>
-</el-main>
-
-
+            <div>
+              <el-row>
+                <el-col :span="2"></el-col>
+                <el-col :span="20">
+                    <el-container>
+                        <el-header><h3>{{ article.category ? "[" + article.category + "]" : "" }} {{ article.title }}</h3></el-header>
+                      <el-main>
+          <div style="display: flex; align-items: center; ">
+            <div v-if="article.url === null">
+              <div style="width: 70px; height: 70px; margin-right: 10px; margin-top: 20px; border-radius: 50%; background-color: white; border: 0.1px solid black;"></div>
+            </div>
+            <div v-else>
+              <img :src="`http://localhost:9244/api/download/img/member/${article.url}`" style="width: 70px; height: 70px; margin-right: 10px; margin-top: 20px; object-fit: cover; border-radius: 50%; border: 0.1px solid black;">
+            </div>
+                  <div>
+                    <h1>{{article.nickname}}</h1>
+                    <div class="dot"></div>
+                    <span>{{ formatRegdt(article.regdt) }}</span>
+                  </div>
+                </div>
+              </el-main>
                 <hr>
                 <el-main>{{article.detail}}</el-main>
                   <template v-if="article.img && article.img.length > 0">
@@ -38,13 +38,12 @@
                 <img :src="`http://localhost:9244/api/download/img/article/${image.apFileUrl}`" style="width: 100%; height: 100%; object-fit: cover;"/>
               </div>
             </template>
-                 <a class="recommend_btn" @click="recommendArticle">
+                 <div class="recommend_btn" @click="recommendArticle">
                 <img src="/images/thumbsup.png">
                 <br>
                 <br>
-                <br>
                 <span class="lcount">{{ article.lcount }}</span>
-                </a>
+                </div>
                   <br>
                   <br>
                 <el-main>
@@ -54,8 +53,17 @@
             <div class="comment-table-wrapper">
             <table>
                 <tbody>
-                <tr v-for="comment in article.comment" :key="comment.ciId">
+                <tr v-for="comment in article.comment" :key="comment.ciSeq">
+                  <!--<td>
+                    <div v-if="comment.mpFileUrl === null">
+                      <div style="width: 50px; height: 50px; border-radius: 50%; background-color: white; border: 0.1px solid black;"></div>
+                    </div>
+                    <div v-else>
+                      <img :src="`http://localhost:9244/api/download/img/member/${comment.mpFileUrl}`" style="width: 50px; height: 50px; border-radius: 50%; border: 0.1px solid black;">
+                    </div>
+                  </td>-->
                     <!-- <td>{{ comment.ciMiSeq }}</td> -->
+                    <td>{{ comment.miNickName}}</td> 
                     <td>{{ comment.ciDetail }}</td>
                     <td>{{ formatRegdt(comment.ciRegDt) }}</td>
                     <td>
@@ -139,6 +147,12 @@ apiBoard.getArticle(this.$route.params.seq)
     },
 
     computed: {
+      isLoggedIn() {
+      return !!sessionStorage.getItem('token');
+    },
+    username() {
+      return sessionStorage.getItem('username');
+    },
       showDeleteButton() {
         return this.article && this.article.miSeq === +sessionStorage.getItem('token');
       },
@@ -380,12 +394,11 @@ td {
   background: #f6f4f4e5;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
   z-index: 10;
-  
   cursor: pointer;
 }
 .recommend_btn img {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -55%);
 }
@@ -411,6 +424,14 @@ dot {
 
 .lcount {
   text-decoration: none;
+}
+
+.username {
+  margin-right: 16px;
+  padding: 8px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 </style>

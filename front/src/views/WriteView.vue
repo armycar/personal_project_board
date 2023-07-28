@@ -1,7 +1,9 @@
 <template>
-<b-navbar toggleable="lg" type="dark" variant="success">
+<b-navbar toggleable="lg" type="dark" variant="info">
     <b-navbar-brand href="/">Board</b-navbar-brand>
-
+<b-navbar-nav>
+        <a v-if="isLoggedIn" class="username">{{ username }}님 안녕하세요</a>
+      </b-navbar-nav>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
@@ -81,7 +83,14 @@ export default {
       seqValue: null,
     };
   },
-
+  computed: {
+     isLoggedIn() {
+      return !!sessionStorage.getItem('token');
+    },
+    username() {
+      return sessionStorage.getItem('username');
+    }
+  },
   mounted() {
     this.seqValue = sessionStorage.getItem('token');
     if (!this.seqValue) {
@@ -141,5 +150,12 @@ export default {
 .right-button {
     float: right;
     padding: 3px 0;
+}
+.username {
+  margin-right: 16px;
+  padding: 8px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>
