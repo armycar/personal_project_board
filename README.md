@@ -73,7 +73,7 @@
   <br>
   <details>
     <summary>게시판 관련</summary>
-    <img width="1271" alt="메인" src="https://github.com/armycar/personal_project_board/assets/118254103/9056daaa-fe6c-4c37-b79c-d93faf3a5be6">
+    <img width="1274" alt="메인" src="https://github.com/armycar/personal_project_board/assets/118254103/be79f64c-c30f-4958-a970-f78bf084d0d0">
     <img width="1071" alt="게시물올리기" src="https://github.com/armycar/personal_project_board/assets/118254103/e0a6202a-d6d3-4e5c-9139-e09a0e2444e9">
 <img width="1101" alt="상세보기" src="https://github.com/armycar/personal_project_board/assets/118254103/db10f830-3fe9-4bc3-98f2-ed763a8613da">
   </details>
