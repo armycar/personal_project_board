@@ -6,6 +6,5 @@ public interface ArticleGetVO {
     public String getAiTitle();
     public Date getAiRegDt();
     public Long getAiMiSeq();
-
     public Long getAiSeq();
 }

@@ -31,6 +31,7 @@ public class ArticleService {
     private final ArticleReadViewRepository rvRepo;
     private final CommentPhotoRepository cpRepo;
     private final CommentInfoRepository ciRepo;
+    private final CommentViewRepository cvRepo;
     private final ArticleRecoRepository arRepo;
 
     @Value("/cm_files/article")
@@ -135,7 +136,7 @@ public class ArticleService {
         ArticleDetailVO response = null;
         ArticleReadViewEntity detail = rvRepo.findByAiSeq(seq);
         ArticleInfoEntity article = aiRepo.findByAiSeq(seq);
-        List<CommentGetVO> comment = ciRepo.findByCiAiSeq(seq);
+        List<CommentGetVO> comment = cvRepo.findByCiAiSeq(seq);
         List<ArticleImgGetVO> img = apRepo.findArticleImgGetVOByApAiSeq(seq);
 
         if(detail == null) {

@@ -38,6 +38,7 @@ public class MemberService {
     private final MyPageViewRepository mvRepo;
     private final ArticleInfoRepository aiRepo;
     private final CommentInfoRepository ciRepo;
+    private final CommentViewRepository cvRepo;
 
     @Value("${file.image.member}") String member_image_path;
 
@@ -493,7 +494,7 @@ public class MemberService {
     public MemberCommentVO getMemberComment(Long seq) {
         MemberCommentVO response = new MemberCommentVO();
 
-        List<CommentGetVO> comment = ciRepo.findByCiMiSeq(seq);
+        List<CommentGetVO> comment = cvRepo.findByCiMiSeq(seq);
         if(comment==null) {
             response = MemberCommentVO.builder()
                     .status(false)
