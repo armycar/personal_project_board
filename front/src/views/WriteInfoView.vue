@@ -10,7 +10,7 @@
     </b-collapse>
   </b-navbar>
   <br><br>
-<span style="font-size: 18px">작성글 관리</span> 
+<span style="font-size: 18px">나의활동</span> 
 <br><br>
     <div>
     <el-tabs v-model="activeTab" @tab-click="handleTabClick">
@@ -26,6 +26,12 @@
                 <el-table-column prop="ciRegDt" label="날짜" align="center"></el-table-column>
             </el-table>
         </el-tab-pane>
+        <el-tab-pane label="스크랩" name="scraps">
+            <el-table @row-click="rowClickedScrap" v-if="activeTab" :data="scraps" style="width: 100%">
+                <el-table-column prop="aiTitle" label="제목" align="center"></el-table-column>
+                <el-table-column prop="aiRegDt" label="날짜" align="center"></el-table-column>
+            </el-table>
+        </el-tab-pane>
     </el-tabs>
     </div>
 </template>
@@ -39,6 +45,7 @@ export default {
             seq: '',
             articles: null,
             comments: null,
+            scraps: null,
             activeTab: 'articles'
         }
     },
@@ -54,6 +61,7 @@ export default {
         this.seq = sessionStorage.getItem('token');
         this.loadArticleInfo();
         this.loadCommentInfo();
+        this.loadScrapInfo();
     },
     methods: {
         loadArticleInfo() {
@@ -86,6 +94,21 @@ export default {
                 console.log(e);
             });
         },
+        loadScrapInfo() {
+            apiMember.getMemberScrap(this.seq)
+            .then(response => {
+                this.scraps = response.data.articles.map((scrap) => {
+                    scrap.aiRegDt = moment(scrap.aiRegDt).format('YYYY-MM-DD HH:mm:ss');
+                    scrap.aiTitle
+                    return scrap;
+                });
+
+                this.scraps.sort((a, b) => new Date(b.aiRegDt) - new Date(a.aiRegDt));
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+        },
         handleTabClick(tab) {
             if(tab.name === 'articles') {
                 this.loadArticleInfo();
@@ -101,6 +124,11 @@ export default {
         rowClickedComment(row) {
             this.$router.push({
                 path: `/api/article/detail/${row.ciAiSeq}`
+            });
+        },
+        rowClickedScrap(row) {
+            this.$router.push({
+                path: `/api/article/detail/${row.aiSeq}`
             });
         }
     }

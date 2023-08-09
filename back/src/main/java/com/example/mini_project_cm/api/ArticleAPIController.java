@@ -84,11 +84,18 @@ public class ArticleAPIController {
                                                          @Parameter(description = "댓글번호", example = "1")Long ciSeq) {
         return new ResponseEntity<>(aService.deleteComment(miSeq, ciSeq),HttpStatus.OK);
     }
-    @Operation(summary = "게시글 좋아요", description = "사용자에게 회원번호와 게시글번호를 받아 좋아요를 추가함")
+    @Operation(summary = "게시글 좋아요", description = "사용자에게 회원번호와 게시물번호를 받아 좋아요를 추가함")
     @PostMapping("/article/recommend")
     public ResponseEntity<BasicResponseVO> articleRecommend(@RequestParam
                                                             @Parameter(description = "회원번호", example = "9")Long miSeq,
-                                                            @Parameter(description = "게시글번호", example = "2") Long aiSeq){
+                                                            @Parameter(description = "게시물번호", example = "2") Long aiSeq){
         return new ResponseEntity<>(aService.recommendArticle(miSeq, aiSeq),HttpStatus.OK);
+    }
+    @Operation(summary = "게시물 스크랩", description = "사용자에게 회원번호와 게시물번호를 받아서 스크랩")
+    @PostMapping("/article/scrap")
+    public ResponseEntity<BasicResponseVO> articleScrap(@RequestParam
+                                                        @Parameter(description = "회원번호", example = "9")Long miSeq,
+                                                        @Parameter(description = "게시물번호", example = "2") Long aiSeq){
+        return new ResponseEntity<>(aService.scrapArticle(miSeq, aiSeq),HttpStatus.OK);
     }
 }

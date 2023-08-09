@@ -78,4 +78,9 @@ public class MemberAPIController {
     public ResponseEntity<MemberCommentVO> memberGetComment(@PathVariable Long seq) {
         return new ResponseEntity<>(mService.getMemberComment(seq), HttpStatus.OK);
     }
+    @Operation(summary = "마이페이지 스크랩 게시물 출력", description = "회원번호를 통해 회원이 스크랩한 게시물 출력합니다")
+    @GetMapping("/get/memberInfo/scrap/{seq}")
+    public ResponseEntity<MemberArticleVO> memberGetScrap(@PathVariable Long seq) {
+        return new ResponseEntity<>(mService.getMemberScrap(seq), HttpStatus.OK);
+    }
 }

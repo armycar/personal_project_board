@@ -36,7 +36,7 @@
     <el-table-column prop="recommend" label="추천수" align="center"></el-table-column>
   </el-table>
 
-  <a v-if="isLoggedIn" href="/api/article/write" class="write_btn">
+  <a href="/api/article/write" class="write_btn">
     <span class="write_text">글쓰기</span>
   </a>
   
@@ -144,13 +144,6 @@ export default {
   padding: 1px 30px;
 }
 
-.write_btn img {
-  position: relative;
-  top: 50%;
-  left: 2%;
-  transform: translate(-50%, -55%);
-}
-
 .write_text {
   position: absolute;
   font-size: 14px;
@@ -160,6 +153,13 @@ export default {
   left: 50%;
   top: 10px;
   transform: translateX(-50%);
+}
+
+.write_btn img {
+  position: relative;
+  top: 50%;
+  left: 2%;
+  transform: translate(-50%, -55%);
 }
 
 .username {

@@ -38,12 +38,18 @@
                 <img :src="`http://localhost:9244/api/download/img/article/${image.apFileUrl}`" style="width: 100%; height: 100%; object-fit: cover;"/>
               </div>
             </template>
+              <div class="button-container">
                  <div class="recommend_btn" @click="recommendArticle">
-                <img src="/images/thumbsup.png">
+                    <span class="recommend_btn_text">추천</span>
                 <br>
                 <br>
                 <span class="lcount">{{ article.lcount }}</span>
                 </div>
+                 <div class="scrap_btn" @click="scrapArticle">
+                    <span class="scrap_btn_text">스크랩</span>
+                    <img src="/images/bookmark.png">
+                 </div>
+              </div>
                   <br>
                   <br>
                 <el-main>
@@ -309,7 +315,6 @@ apiBoard.getArticle(this.$route.params.seq)
             this.$message.error('로그인이 필요합니다');
             return;
           }
-
             apiBoard.recommendArticle(sessionStorage.getItem('token'), this.article.aiSeq)
             .then((response) => {
               console.log(response);
@@ -319,7 +324,25 @@ apiBoard.getArticle(this.$route.params.seq)
               console.log(error);
               this.$message.error("게시글 추천중 에러발생")
             })
+          },
+        scrapArticle() {
+          if(!this.seqValue) {
+            this.$message.error('로그인이 필요합니다');
+            return;
           }
+            apiBoard.scrapArticle(sessionStorage.getItem('token'), this.article.aiSeq)
+            .then((response) => {
+              console.log(response);
+              this.$message({
+              message: '게시물을 스크랩 하였습니다',
+              type: 'success'
+        })
+            })
+            .catch((error) => {
+              console.log(error);
+              this.$message.error("게시물 스크랩중 에러발생")
+            }) 
+        }
         },
         formatComment(row) {
      if (row.comment && Array.isArray(row.comment)) {
@@ -381,27 +404,42 @@ td {
 .img-wrapper img {
   max-width: 100%;
 }
-.recommend_btn {
-  margin-bottom: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  transform: translate(50%, 50%);
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.recommend_btn, .scrap_btn {
   width: 80px;
   height: 80px;
-  border: 0.05px  black;
   border-radius: 50px;
   background: #f6f4f4e5;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
   z-index: 10;
   cursor: pointer;
+  margin: 10px; /* 버튼 간격 조정 */
 }
-.recommend_btn img {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -55%);
+
+.recommend_btn_text {
+  position: relative;
+  top: 32%
 }
+
+.scrap_btn_text {
+  position: relative;
+  top: 32%;
+  left: 10%;
+}
+
+.scrap_btn img {
+  position: relative;
+  top: 58%;
+  left: -30%;
+}
+
 hr {
     border: none;
     border-top: 1px solid #bbb;

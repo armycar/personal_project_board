@@ -57,5 +57,8 @@ export default {
     },
     getMemberComment: function(seq) {
         return axios.get(BASE_URL+`/api/member/get/memberInfo/comment/${seq}`);
+    },
+    getMemberScrap: function(seq) {
+        return axios.get(BASE_URL+`/api/member/get/memberInfo/scrap/${seq}`);
     }
 }
