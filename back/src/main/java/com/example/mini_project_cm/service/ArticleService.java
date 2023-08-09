@@ -33,6 +33,7 @@ public class ArticleService {
     private final CommentInfoRepository ciRepo;
     private final CommentViewRepository cvRepo;
     private final ArticleRecoRepository arRepo;
+    private final ArticleScrapRepository asRepo;
 
     @Value("/cm_files/article")
     String article_image_path;
@@ -496,6 +497,50 @@ if(photo != null) {
                 response = BasicResponseVO.builder()
                         .status(true)
                         .message("좋아요를 취소하였습니다")
+                        .code(HttpStatus.OK)
+                        .build();
+            }
+        return response;
+    }
+
+    //게시글 스크랩
+    public BasicResponseVO scrapArticle(Long miSeq, Long aiSeq) {
+        BasicResponseVO response = new BasicResponseVO();
+        MemberInfoEntity member = miRepo.findByMiSeq(miSeq);
+        ArticleInfoEntity article = aiRepo.findByAiSeq(aiSeq);
+        ArticleScrapEntity scrap = asRepo.findByAsAiSeqAndAsMiSeq(aiSeq, miSeq);
+
+        if (member == null) {
+            response = BasicResponseVO.builder()
+                    .status(false)
+                    .message("해당하는 회원이 없습니다")
+                    .code(HttpStatus.BAD_REQUEST)
+                    .build();
+        }
+        else if (article == null) {
+            response = BasicResponseVO.builder()
+                    .status(false)
+                    .message("해당하는 게시글이 없습니다")
+                    .code(HttpStatus.BAD_REQUEST)
+                    .build();
+        }
+        else if (scrap == null) {
+                ArticleScrapEntity articleScrap = ArticleScrapEntity.builder()
+                        .asAiSeq(article.getAiSeq())
+                        .asMiSeq(member.getMiSeq())
+                        .build();
+                asRepo.save(articleScrap);
+                response = BasicResponseVO.builder()
+                        .status(true)
+                        .message("게시물을 스크랩 하였습니다")
+                        .code(HttpStatus.OK)
+                        .build();
+
+            } else if (scrap != null) {
+                asRepo.delete(scrap);
+                response = BasicResponseVO.builder()
+                        .status(true)
+                        .message("스크랩을 취소하였습니다")
                         .code(HttpStatus.OK)
                         .build();
             }

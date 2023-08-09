@@ -1,9 +1,6 @@
 package com.example.mini_project_cm.service;
 
-import com.example.mini_project_cm.entity.ArticleInfoEntity;
-import com.example.mini_project_cm.entity.MemberInfoEntity;
-import com.example.mini_project_cm.entity.MemberPhotoEntity;
-import com.example.mini_project_cm.entity.MyPageViewEntity;
+import com.example.mini_project_cm.entity.*;
 import com.example.mini_project_cm.repository.*;
 import com.example.mini_project_cm.utils.AESAlgorithm;
 import com.example.mini_project_cm.vo.BasicResponseVO;
@@ -39,6 +36,7 @@ public class MemberService {
     private final ArticleInfoRepository aiRepo;
     private final CommentInfoRepository ciRepo;
     private final CommentViewRepository cvRepo;
+    private final ArticleScrapRepository asRepo;
 
     @Value("${file.image.member}") String member_image_path;
 
@@ -513,4 +511,30 @@ public class MemberService {
 
         return response;
     }
+
+    // 스크랩한 게시글 보기
+    public MemberArticleVO getMemberScrap(Long seq) {
+        MemberArticleVO response = new MemberArticleVO();
+
+        for(ArticleScrapEntity member : asRepo.findByAsMiSeq(seq)) {
+            if(member != null) {
+            List<ArticleGetVO> article = aiRepo.findListByAiSeq(member.getAsAiSeq());
+                response = MemberArticleVO.builder()
+                        .articles(article)
+                        .status(true)
+                        .message("조회에 성공 하였습니다")
+                        .code(HttpStatus.OK)
+                        .build();
+            }
+            else {
+                response = MemberArticleVO.builder()
+                        .status(false)
+                        .message("스크랩한 게시물이 없습니다")
+                        .code(HttpStatus.OK)
+                        .build();
+            }
+            }
+        return response;
+        }
 }
+
