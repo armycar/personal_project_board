@@ -22,6 +22,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -516,25 +517,34 @@ public class MemberService {
     public MemberArticleVO getMemberScrap(Long seq) {
         MemberArticleVO response = new MemberArticleVO();
 
-        for(ArticleScrapEntity member : asRepo.findByAsMiSeq(seq)) {
-            if(member != null) {
-            List<ArticleGetVO> article = aiRepo.findListByAiSeq(member.getAsAiSeq());
-                response = MemberArticleVO.builder()
-                        .articles(article)
-                        .status(true)
-                        .message("조회에 성공 하였습니다")
-                        .code(HttpStatus.OK)
-                        .build();
+        List<ArticleGetVO> articles = new ArrayList<>();
+
+        List<ArticleScrapEntity> members = asRepo.findByAsMiSeq(seq);
+        for (ArticleScrapEntity member : members) {
+            if (member != null) {
+                List<ArticleGetVO> article = aiRepo.findListByAiSeq(member.getAsAiSeq());
+                articles.addAll(article);
             }
-            else {
-                response = MemberArticleVO.builder()
-                        .status(false)
-                        .message("스크랩한 게시물이 없습니다")
-                        .code(HttpStatus.OK)
-                        .build();
-            }
-            }
-        return response;
         }
+
+        if (!articles.isEmpty()) {
+            response = MemberArticleVO.builder()
+                    .articles(articles)
+                    .status(true)
+                    .message("조회에 성공 하였습니다")
+                    .code(HttpStatus.OK)
+                    .build();
+        }
+        else {
+            response = MemberArticleVO.builder()
+                    .status(false)
+                    .message("스크랩한 게시물이 없습니다")
+                    .code(HttpStatus.OK)
+                    .build();
+        }
+
+        return response;
+    }
+
 }
 
