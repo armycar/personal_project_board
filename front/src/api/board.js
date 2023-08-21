@@ -6,11 +6,12 @@ export default {
     getArticle: function(seq) {
         return axios.get(BASE_URL + `/api/article/detail?seq=${seq}`);
     },
-    getArticles: function(type, page, size) {
+    getArticles: function(type, page, size, keyword) {
         return axios.get(BASE_URL + `/api/article/read/${type}`,{
             params: {
                 page:page,
-                size:size
+                size:size,
+                keyword: keyword
             }
         })
     },

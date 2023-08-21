@@ -8,10 +8,16 @@
       </b-navbar-nav>
 
         <b-navbar-nav style="margin-left: auto;">
-          <b-nav-form >
-            <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+          <b-nav-form @submit.stop.prevent="search">
+            <b-form-input v-model="searchKeyword" size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
             <b-button size="sm" class="my-2 my-sm-0" type="submit" >Search</b-button>
           </b-nav-form>
+
+          <b-nav-item-dropdown text="Type" right>
+          <b-dropdown-item @click="setSearchType('author')">글쓴이</b-dropdown-item>
+          <b-dropdown-item @click="setSearchType('title')">제목</b-dropdown-item>
+          <b-dropdown-item @click="setSearchType('detail')">내용</b-dropdown-item>
+        </b-nav-item-dropdown>
       </b-navbar-nav>
 
 
@@ -62,7 +68,9 @@ export default {
     return {
       articles: null,
       page: 1,
-      totalPages: 0
+      totalPages: 0,
+      searchKeyword: '',
+      searchType: 'all'
     };
   },
   computed: {
@@ -80,6 +88,27 @@ export default {
     this.loadArticles();
   },
   methods: {
+    setSearchType(type) {
+      this.searchType = type;
+    },
+    search() {
+      if(this.searchKeyword.trim() !== '') {
+        const size = 5;
+
+        apiBoard.getArticles(this.searchType, this.page-1 ,size, this.searchKeyword)
+        .then((response) => {
+          this.articles = response.data.content.map((article) => {
+            article.aiRegDt = moment(article.aiRegDt).format('YYYY-MM-DD HH:mm:ss');
+            return article;
+        });
+        const totalCount = response.data.totalElements;
+          this.totalPages = Math.ceil(totalCount / size);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      }
+    },
     loadArticles() {
       const type = 'all';
       const size = 5;
