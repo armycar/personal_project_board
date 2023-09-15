@@ -11,6 +11,9 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -543,6 +546,21 @@ public class MemberService {
                     .build();
         }
 
+        return response;
+    }
+
+    //회원리스트(관리자전용)
+    public Page<MemberListVO> readMemberList(String type, String keyword, Integer page, Integer size) {
+        if (page == null) page = 0;
+        if (size == null) size = 5;
+        PageRequest pageRequest = PageRequest.of(page,size, Sort.by("miRegDt").descending());
+        Page<MemberListVO> response = null;
+
+        if(type.equals("all")) {
+            response = miRepo.findAll(pageRequest);
+        } else if (type.equals("nickname")) {
+            response = miRepo.searchNickname(keyword, pageRequest);
+        }
         return response;
     }
 

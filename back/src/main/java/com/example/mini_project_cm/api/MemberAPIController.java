@@ -7,7 +7,9 @@ import com.example.mini_project_cm.vo.member.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -82,5 +84,17 @@ public class MemberAPIController {
     @GetMapping("/get/memberInfo/scrap/{seq}")
     public ResponseEntity<MemberArticleVO> memberGetScrap(@PathVariable Long seq) {
         return new ResponseEntity<>(mService.getMemberScrap(seq), HttpStatus.OK);
+    }
+    @Operation(summary = "회원 전체리스트 조회", description = "회원의 리스트를 모두 보여줌")
+    @GetMapping("/admin/memberList/{type}")
+    public ResponseEntity<Page<MemberListVO>> getMemberList(
+            @Parameter(description = "검색타입 = all(전체) / nickname(닉네임)", example = "all") @PathVariable String type,
+            @RequestParam(required = false, value = "keyword") String keyword,
+            @RequestParam @Nullable Integer page,
+            @RequestParam @Nullable Integer size
+    )
+    {
+        Page<MemberListVO> response = mService.readMemberList(type, keyword, page, size);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
