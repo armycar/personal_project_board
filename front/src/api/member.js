@@ -60,5 +60,14 @@ export default {
     },
     getMemberScrap: function(seq) {
         return axios.get(BASE_URL+`/api/member/get/memberInfo/scrap/${seq}`);
-    }
+    },
+    getMemberList: function(type, page, size, keyword) {
+        return axios.get(BASE_URL + `/api/member/admin/memberList/${type}`,{
+            params: {
+                page:page,
+                size:size,
+                keyword: keyword
+            }
+        })
+    },
 }

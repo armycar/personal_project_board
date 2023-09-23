@@ -84,6 +84,7 @@ public class MemberService {
                     .miEmail(data.getEmail())
                     .miNickName(data.getNickname())
                     .miPwd(data.getPwd())
+                    .miRole("USER")
                     .build();
 
             miRepo.save(member);
