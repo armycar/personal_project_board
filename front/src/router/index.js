@@ -9,6 +9,7 @@ import SearchPwd from '../views/SearchPwd.vue'
 import UpdateMemberInfo from '../views/UpdateMemberInfo.vue'
 import UpdateView from '../views/UpdateView.vue'
 import WriteInfoView from '../views/WriteInfoView.vue'
+import MemberList from '../views/MemberList.vue'
 
 const routes = [
   {
@@ -65,6 +66,11 @@ const routes = [
     path: '/api/member/get/memberInfo',
     name: 'WriteInfoView',
     component: WriteInfoView
+  },
+  {
+    path: '/api/admin/memberList',
+    name: 'MemberList',
+    component: MemberList
   }
 ]
 

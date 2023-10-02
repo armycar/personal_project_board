@@ -56,6 +56,7 @@ export default {
           console.log(response);
           const token = response.data.miSeq;
           const username = response.data.nickname;
+          const userrole = response.data.miRole;
           if(!this.email || !this.pwd) {
             this.$message.error("아이디와 비밀번호를 입력해주세요");
             return;
@@ -68,6 +69,7 @@ export default {
           } else {
             sessionStorage.setItem('token', token);
             sessionStorage.setItem('username', username); //로그인 되었을때 화면에 username 보이게하기
+            sessionStorage.setItem('role', userrole);
             this.$router.push('/');
             this.$message({
               message: '로그인 되었습니다',

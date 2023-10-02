@@ -11,7 +11,8 @@ import org.springframework.http.HttpStatus;
 public class LoginResponseVO {
     @Schema(description = "회원번호")
     private Long miSeq;
-
+    @Schema(description = "회원등급")
+    private String miRole;
     @Schema(description = "회원닉네임")
     private String nickname;
     @Schema(description = "성공(true)/실패(false)", example = "true")

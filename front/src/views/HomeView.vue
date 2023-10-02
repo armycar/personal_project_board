@@ -25,6 +25,7 @@
 </div>
 
   <div class="top-nav">
+    <a v-if="isLoggedIn && userrole === 'ADMIN'" href="/api/admin/memberList" class="manage_btn">회원관리</a>
     <router-link v-if="isLoggedIn" to="/mypage" class="mypage_btn">마이페이지</router-link>
     <a v-if="isLoggedIn" href="#" class="logout_btn" @click="logout">로그아웃</a>
     <a v-if="!isLoggedIn" href="/api/member/join" class="join_btn">회원가입</a>
@@ -79,6 +80,9 @@ export default {
     },
     username() {
       return sessionStorage.getItem('username');
+    },
+    userrole() {
+      return sessionStorage.getItem('role')
     },
     getPagerCount() {
       return Math.ceil(this.totalPages / 5);
@@ -199,6 +203,7 @@ export default {
   cursor: pointer;
 }
 
+.manage_btn,
 .login_btn,
 .join_btn,
 .logout_btn,

@@ -130,6 +130,7 @@ public class MemberService {
         } else {
             response = LoginResponseVO.builder()
                     .miSeq(loginUser.getMiSeq())
+                    .miRole(loginUser.getMiRole())
                     .nickname(loginUser.getMiNickName())
                     .status(true)
                     .message("로그인 되었습니다")
