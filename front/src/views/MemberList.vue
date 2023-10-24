@@ -7,10 +7,21 @@
 <b-navbar-nav>
         <a v-if="isLoggedIn" class="username">{{ username }}님 안녕하세요</a>
       </b-navbar-nav>
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
     <b-collapse id="nav-collapse" is-nav>
     </b-collapse>
+
+    <b-navbar-nav style="margin-left: auto;">
+      <b-nav-form @submit.stop.prevent="search">
+        <b-form-input v-model="searchKeyword" size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+        <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+      </b-nav-form>
+
+      <b-nav-item-dropdown text="Type" right>
+      <b-dropdown-item @click="setSearchType('nickname')">닉네임</b-dropdown-item>
+      <b-dropdown-item @click="setSearchType('status')">활동상태</b-dropdown-item>
+      </b-nav-item-dropdown>
+    </b-navbar-nav>
+
   </b-navbar>
 </div>  
 
@@ -46,6 +57,9 @@ export default {
             totalPages: 0,
         };
     },
+    mounted() {
+      this.loadMemberList();
+    },
     computed: {
       getPagerCount() {
         return Math.ceil(this.totalPages / 5);
@@ -59,7 +73,28 @@ export default {
     }
     ,
     methods: {
-        loadMemberList() {
+      setSearchType(type) {
+        this.searchType = type;
+      },
+      search() {
+        if(this.searchKeyword.trim() !== '') {
+          const size = 5;
+
+          apiMember.getMemberList(this.searchType, this.page-1, size, this.searchKeyword)
+          .then((response) => {
+            this.members = response.data.content.map((member) => {
+              member.miRegDt = moment(member.miRegDt).format('YYYY-MM-DD HH:mm:ss');
+              return member;
+            });
+            const totalCount = response.data.totalElements;
+              this.totalPages = Math.ceil(totalCount / size);
+          })
+          .catch((e) => {
+            console.log(e);
+          })
+        }
+      },
+      loadMemberList() {
       const type = 'all';
       const size = 5;
 
