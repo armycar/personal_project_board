@@ -63,11 +63,11 @@
 
 <img width="249" alt="회원정보변경" src="https://github.com/armycar/personal_project_board/assets/118254103/254a9ab0-4fb0-47ac-9c5e-057f81883e5e">
 
-<img width="393" alt="마이페이지" src="https://github.com/armycar/personal_project_board/assets/118254103/4d36e5ac-eae2-4b2f-a376-27e6b7e37edc">
+<img width="270" alt="마이페이지" src="https://github.com/credit102/personal_project_board/assets/118254103/7a4c58b7-fce1-4c98-87cf-60ed9669dacc">
 
-<img width="1277" alt="작성글관리" src="https://github.com/armycar/personal_project_board/assets/118254103/fd641ce2-c774-49a1-90bf-6d2a4ea62e10">
+<img width="1280" alt="나의활동" src="https://github.com/credit102/personal_project_board/assets/118254103/0f983548-60c1-4b0b-bb1d-298d924396f2">
 
-<img width="1279" alt="댓글관리" src="https://github.com/armycar/personal_project_board/assets/118254103/b2319590-a840-4a98-a477-2cbfcce22b88">
+
 
   </details>
   <br>
