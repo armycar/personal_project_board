@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Data @Entity @Table(name = "member_info") @AllArgsConstructor @NoArgsConstructor @Builder
 @DynamicInsert
-public class MemberInfoEntity {
+public class MemberInfoEntity { // 회원정보
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mi_seq") private Long miSeq;
     @Column(name = "mi_email") private String miEmail;
