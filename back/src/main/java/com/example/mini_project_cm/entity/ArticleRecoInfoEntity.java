@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @DynamicInsert
-public class ArticleRecoInfoEntity {
+public class ArticleRecoInfoEntity { // 게시물 추천 정보
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ar_seq") private Long arSeq;
     @Column(name = "ar_ai_seq") private Long arAiSeq;

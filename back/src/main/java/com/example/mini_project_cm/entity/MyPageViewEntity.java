@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MyPageViewEntity {
+public class MyPageViewEntity { // 마이페이지 정보뷰
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mi_seq") private Long miSeq;
     @Column(name = "mi_nickname") private String miNickname;

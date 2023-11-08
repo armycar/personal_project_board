@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ArticlePhotoEntity {
+public class ArticlePhotoEntity { // 게시물 사진
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ap_seq") private Long apSeq;
     @Column(name = "ap_file_name") private String apFileName;

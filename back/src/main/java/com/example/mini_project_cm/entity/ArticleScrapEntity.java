@@ -14,7 +14,7 @@ import org.hibernate.annotations.DynamicInsert;
 @NoArgsConstructor
 @Builder
 @DynamicInsert
-public class ArticleScrapEntity {
+public class ArticleScrapEntity { // 게시물 스크랩
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "as_seq") private Long asSeq;
     @Column(name = "as_ai_seq") private Long asAiSeq;

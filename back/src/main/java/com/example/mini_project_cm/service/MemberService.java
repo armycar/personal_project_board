@@ -47,7 +47,7 @@ public class MemberService {
     //회원가입
     public BasicResponseVO joinMember(MemberJoinVO data) {
         BasicResponseVO response = new BasicResponseVO();
-        String pattern = "^[a-zA-Z0-9!@#$%^&*()-_=+]*$";
+        String pattern = "^[a-zA-Z0-9!@#$%^&*()-_=+]*$"; // 유효성 검사를 위한 변수
 
         if (data.getPwd().length() < 8) {
             response = BasicResponseVO.builder()
@@ -75,7 +75,7 @@ public class MemberService {
                     .build();
         } else {
             try {
-                String encPwd = AESAlgorithm.Encrypt(data.getPwd());
+                String encPwd = AESAlgorithm.Encrypt(data.getPwd()); // 비밀번호 암호화 작업
                 data.setPwd(encPwd);
             } catch (Exception e) {
                 e.printStackTrace();

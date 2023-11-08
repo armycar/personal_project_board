@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ArticleCategoryEntity {
+public class ArticleCategoryEntity { // 게시물 카테고리
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ac_seq") private Long acSeq;
     @Column(name = "ac_name") private String acName;

@@ -19,7 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @DynamicInsert
-public class ArticleInfoEntity {
+public class ArticleInfoEntity { //게시물 정보
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ai_seq") private Long aiSeq;
     @Column(name = "ai_title") private String aiTitle;

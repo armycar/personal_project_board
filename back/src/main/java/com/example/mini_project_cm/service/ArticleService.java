@@ -137,7 +137,7 @@ public class ArticleService {
         ArticleDetailVO response = null;
         ArticleReadViewEntity detail = rvRepo.findByAiSeq(seq);
         ArticleInfoEntity article = aiRepo.findByAiSeq(seq);
-        List<CommentGetVO> comment = cvRepo.findByCiAiSeq(seq);
+        List<CommentGetVO> comment = cvRepo.findByCiAiSeq(seq); // comment view를 이용해서 댓글정보들을 리스트에 담기
         List<ArticleImgGetVO> img = apRepo.findArticleImgGetVOByApAiSeq(seq);
 
         if(detail == null) {
@@ -242,7 +242,7 @@ public class ArticleService {
         } else if (article.getAiMiSeq() == member.getMiSeq()) {
             //이미지 파일 DB와 폴더에서 삭제
 
-            if(comment != null) {
+            if(comment != null) { // 게시물의 댓글을 조회후 삭제실행
                 for(CommentInfoEntity comments : comment)
                 ciRepo.delete(comments);
             }

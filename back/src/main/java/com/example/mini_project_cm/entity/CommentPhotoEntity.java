@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CommentPhotoEntity {
+public class CommentPhotoEntity { // 댓글 사진
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cp_seq") private Long cpSeq;
     @Column(name = "cp_file_name") private String cpFileName;

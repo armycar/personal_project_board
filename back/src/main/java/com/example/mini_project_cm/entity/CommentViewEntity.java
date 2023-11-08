@@ -17,7 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @DynamicInsert
-public class CommentViewEntity {
+public class CommentViewEntity { // 댓글 상세보기 뷰
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ci_seq") private Long       ciSeq;
     @Column(name = "mi_nickname") private String  miNickName;

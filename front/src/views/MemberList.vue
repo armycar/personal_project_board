@@ -23,6 +23,10 @@
     </b-navbar-nav>
 
   </b-navbar>
+  <br>
+  <span style="font-size: 18px;">회원 관리</span>
+  <br>
+  <br>
 </div>  
 
 <el-table :data="members" style="width: 100%">

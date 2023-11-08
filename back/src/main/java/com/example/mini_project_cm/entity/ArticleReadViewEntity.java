@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ArticleReadViewEntity {
+public class ArticleReadViewEntity { // 게시물 상세보기 뷰
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ai_seq") private Long aiSeq;
     @Column(name = "ai_title") private String aiTitle;
